@@ -8,7 +8,7 @@
   - We want to show that:
     - it's easy to use physical devices
     
-- build restful server (control lamp
+- build restful server (control lamp)
   - We want to show that:
     - it easy to build an API
     - e.g. /myserver/lamp/on
