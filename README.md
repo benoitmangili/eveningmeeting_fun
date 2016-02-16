@@ -14,11 +14,13 @@
     - e.g. /myserver/lamp/on
            /myserver/lamp/off
   
-- web app to exercise api + d3 )
+- web app to exercise api ( + d3 )
   - We want to show that:
     - it's easy to build a backend
 
 - listen to tweets to turn on/off the heater/lamp
+  - people tweet on/off
+  - average on the last 10 tweet
   - We want to show that:
     - Everything is awesome!
 
