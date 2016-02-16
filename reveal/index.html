@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Software Development</title>
+
+    <meta name="description" content="Software engineering lecture">
+    <meta name="author" content="Benoit Mangili">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/beige.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="my.css">
+
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+ 
+        <section>
+          <h1>Software engineering</h1>
+        </section>
+
+        <section>
+          <img width="800em" data-src="img/bridge2.jpg" alt="Down arrow"/>
+          <aside class="notes">
+            what does it mean to apply engineering techniques to software?<br/>
+            After all, we simply write some lines of code in files, compile it, and execute it. It's not like building a bridge...<br/>
+            Well, if you think about it, building a bridge can be done by simply linking bits of wood together...
+          </aside>
+        </section>
+        <section>
+          <h1>Software engineering</h1>
+        <section>
+          <h1>Software engineering</h1>
+        </section>
+        <section>
+          <h1>Software engineering</h1>
+        </section>
+        <section>
+          <h1>Software engineering</h1>
+        <section>
+          <h1>Software engineering</h1>
+        </section>
+        <section>
+          <h1>Software engineering</h1>
+        </section>
+        </section>
+          
+          <section>
+            <pre class="python"><code data-trim contenteditable>
+def compare(arg_1, arg_2):
+    if arg_1 < arg_2:
+        return -1
+    if arg_1 > arg_2:
+        return 1
+    return 0
+            </code></pre>
+          </section>
+
+
+
+
+
+
+
+          <section>
+            <h2>Purpose of the function</h2>
+            <pre class="highlight python">
+def foo(a, b, c):<span class="fragment zoom-in highlight-current-green">
+    s = []
+    f = open('my_file', 'r')
+    for l in f:
+        ll = l.split(',');
+        if ll[0] == 'bar':
+            s.append(ll)
+    f.close()</span><span class="fragment zoom-in highlight-current-green">
+    z = 0
+    for e in ll:
+        if ll[1] == 'foo':
+            z += 1
+        elif ll[2] == 'foo':
+            z += 1</span><span class="fragment zoom-in highlight-current-green">
+    f = open(b, 'w')
+    f.write('Report')
+    f.write('bar has been used properly {0} times.'.format(z)) 
+    f.close()</span></pre>
+          </section>
+
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        parallaxBackgroundImage: 'img/6s.jpg', 
+        parallaxBackgroundSize: '1020px 654px',
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js',
+            async: true,
+            // condition: function() { 
+            //   return !!document.querySelector( 'pre code' );
+            // },
+            callback: function() {
+              [].forEach.call(document.querySelectorAll('.highlight, pre code'),
+                function(v,i){
+                  hljs.highlightBlock(v);
+                })
+            } 
+          },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
