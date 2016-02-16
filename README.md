@@ -22,7 +22,7 @@
     
 - getting sensor data from the pi
     - We want to show that:
-       - use input data from sensors in order to control something
+       - you can use input data from sensors in order to control something
 
 - listen to tweets to turn on/off the heater/lamp
   - people tweet on/off
@@ -40,7 +40,7 @@ GPIO zero
 
 
 
-- tell iain to shut up about his Nest (http://www.bbc.co.uk/news/technology-35311447)
+- tell Iain to shut up about his Nest (http://www.bbc.co.uk/news/technology-35311447)
 
 
 # need
@@ -48,5 +48,6 @@ GPIO zero
 - lamp (Benoit)
 - an audio output cable (anniek + benoit)
 - speaker (anniek)
-- charging the speaker!
+- charging the speaker, anniek!
+- router and lan cables
 
