@@ -14,9 +14,15 @@
     - e.g. /myserver/lamp/on
            /myserver/lamp/off
   
-- web app to exercise api ( + d3 )
+- web app to exercise api
   - We want to show that:
     - it's easy to build a backend
+    - it is easy to build a little app
+   
+    
+- getting sensor data from the pi
+    - We want to show that:
+       - use input data from sensors in order to control something
 
 - listen to tweets to turn on/off the heater/lamp
   - people tweet on/off
