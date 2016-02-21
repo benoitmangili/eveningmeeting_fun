@@ -7,6 +7,7 @@
   - transistor
   - We want to show that:
     - it's easy to use physical devices
+    - briefly explain the different raspberry pi pins (gpio vs static voltage out pins) and why we need the transistor.
     
 - build restful server (control lamp)
   - We want to show that:
