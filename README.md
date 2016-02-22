@@ -5,9 +5,10 @@
 - turn on/off light with a script on the pi
   - relay
   - transistor
+  - briefly explain the different raspberry pi pins (gpio vs static voltage out pins) and why we need the transistor.
   - We want to show that:
     - it's easy to use physical devices
-    - briefly explain the different raspberry pi pins (gpio vs static voltage out pins) and why we need the transistor.
+    
     
 - build restful server (control lamp)
   - We want to show that:
@@ -22,6 +23,7 @@
    
     
 - getting sensor data from the pi
+    - Mention that lots of different protocols are supported by the pi: 1-wire, i2c. For all of them there is lots of information online.
     - We want to show that:
        - you can use input data from sensors in order to control something
 
@@ -37,15 +39,10 @@
 GPIO zero
 
 
-
-
-
-
 - tell Iain to shut up about his Nest (http://www.bbc.co.uk/news/technology-35311447)
 
 
 # need
-- 
 - lamp (Benoit)
 - an audio output cable (anniek + benoit)
 - speaker (anniek)
