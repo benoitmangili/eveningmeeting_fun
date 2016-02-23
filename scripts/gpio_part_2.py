@@ -1,6 +1,9 @@
 from flask import Flask, send_from_directory
-import RPi.GPIO as GPIO
-from time import time
+try:
+   import RPi.GPIO as GPIO
+except:
+    from MockGPIO import MockGPIO
+    GPIO = MockGPIO()
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -42,4 +45,4 @@ if __name__ == '__main__':
         # app.run(host='0.0.0.0', port=8080, debug=True)
     finally:
         GPIO.cleanup()
-        print "Bye"
+        print "Bye."
