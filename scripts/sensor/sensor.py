@@ -45,3 +45,17 @@ class DS18B20:
 
         return newMeasurement
 
+    def __readSensor(self):
+        f = open(self.device_file, 'r')
+        rawData = f.readlines()
+        f.close()
+        return rawData
+
+    def __formatSensorData(self, stringInput):
+
+        equals_pos = stringInput.find('t=')
+        if equals_pos != -1:
+            temp_string = stringInput[equals_pos+2:]
+            temp_c = float(temp_string) / 1000.0 # Sensor returns 1/1000 degC
+            return temp_c
+

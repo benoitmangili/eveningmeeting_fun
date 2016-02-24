@@ -21,6 +21,7 @@ sensor = sensor()
 
 app = Flask(__name__)
 
+threshold = []
 
 # Load index page
 @app.route('/')
@@ -34,6 +35,17 @@ def measure_temperature():
     return jsonify(value=measurement.value, time=measurement.timeStamp)
 
 
+@app.route('/set_point', methods=['GET', 'PUT'])
+def set_set_point():
+    global threshold
+    if request.method == 'POST':
+        data = request.form
+        threshold = data['set_point']
+    else:
+        return jsonify(threshold=threshold)
+
+# add method that decides whether to turn the heater on or off
+# (don't call /lamp, wrap code to change pin state in function and reuse here.)
 
 @app.route('/lamp', methods=['GET', 'POST'])
 def lamp_stuff():
