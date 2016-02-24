@@ -21,9 +21,9 @@ def hello_world():
     return render_template('index_part3.html')
 
 
-@app.route('/lamp', methods=['GET', 'POST'])
+@app.route('/lamp', methods=['GET', 'PUT'])
 def lamp_stuff():
-    if request.method == 'POST':
+    if request.method == 'PUT':
         # Change state
         data = request.form
         state = data['state']
@@ -35,11 +35,11 @@ def lamp_stuff():
         else:
             print 'Invalid state!'
             gpio_state = []
-            pass  # TODO: escape the function at this point
+            return
 
         GPIO.output(pin, gpio_state)
         # Give the pin a moment to change state
-        sleep(0.001)
+        sleep(0.01)
 
     # determines the state from the raspberry pi pin
     gpio_state = GPIO.input(pin)
@@ -53,8 +53,8 @@ def lamp_stuff():
 
 if __name__ == '__main__':
     try:
-        app.run(debug=True)
-        # app.run(host='0.0.0.0', port=8080, debug=True)
+        # app.run(debug=True)
+        app.run(host='0.0.0.0', port=8080, debug=True)
     finally:
         GPIO.cleanup()
         print "Bye."
