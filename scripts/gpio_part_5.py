@@ -27,21 +27,25 @@ def hello_world():
 # Can be used for the life update stream of tweets
 @app.route('/get_tweets/<int:num_tweets>')
 def get_last_tweet(num_tweets):
+    # Limit the number of tweets that people can get.
     tweets = twitter.get_tweets('tweet_pi_tweet', num_tweets)
     tweet_text = [tweet.text for tweet in tweets]
     tweet_author = [tweet.author.screen_name for tweet in tweets]
 
     return json.dumps([{"author": name, "tweet": text} for name,text in zip(tweet_author, tweet_text)])
 
-# Used for deciding whether to turn the heating on or off
+#TODO: This should not be an endpoint and and run all the time. Should be put in a loop. Put this in a separate thread.
+# Use the periodic timer
 @app.route('/twitter_vote')
 def twitter_vote():
 
     # Use only the 10 last tweets
     tweets = twitter.get_tweets('tweet_pi_tweet', 10)
+    # check if need to handle case where there are less than 10
     tweet_text = [tweet.text for tweet in tweets]
 
     # Turn on heater via voting system
+    # change to hotter/colder. 'make it hot, make it hotter'
     num_people_too_hot = sum([tweet.find('hot')>0 for tweet in tweet_text])
     num_people_too_cold = sum([tweet.find('cold')>0 for tweet in tweet_text])
 
