@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" href="{{ url_for('static', filename='style/bootstrap/css/bootstrap.css') }}">
+
+ <!-- make it mobile friendly: -->
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- my own css: -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
+</head>
+<body>
+  <h1>Control That Light!</h1>
+  <div class="jumbotron">
+    <div class="container">
+      <div class="row">
+        <div class="buttons container">
+          <div class="col-md-6">
+            <div class ="pull-right">
+              <div class="OnButton">
+                <button type="button" class="btn btn-default">On</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="OffButton">
+              <button type="button" class="btn btn-default">Off</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End of the Jumbotron -->
+    <div class="LED container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+
+  <script scr="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
-from flask import Flask, request, jsonify
-
+from flask import Flask, request, jsonify, render_template
+from time import sleep
 try:
    import RPi.GPIO as GPIO
 except:
@@ -18,36 +18,37 @@ app = Flask(__name__)
 # Return hello world to the index page
 @app.route('/')
 def hello_world():
-    return '<h1>Greetings, Stevenage Branch!</h1>' \
-           '<p>We hope you enjoy the show!</p>'
+    return render_template('index_part3.html')
 
 
 @app.route('/lamp', methods=['GET', 'POST'])
 def lamp_stuff():
     if request.method == 'POST':
-        data = request.json
+        # Change state
+        data = request.form
         state = data['state']
 
-        if state == 'High'.lower():
+        if state == 'High':
             gpio_state = GPIO.HIGH()
-        elif state == 'Low'.lower():
+        elif state == 'Low':
             gpio_state = GPIO.LOW()
         else:
             print 'Invalid state!'
             gpio_state = []
-            pass
+            pass  # TODO: escape the function at this point
 
         GPIO.output(pin, gpio_state)
+        # Give the pin a moment to change state
+        sleep(0.001)
 
+    # determines the state from the raspberry pi pin
+    gpio_state = GPIO.input(pin)
+    if gpio_state:
+        state = 'High'
     else:
-        # determines the state from the raspberry pi pin
-        gpio_state = GPIO.input(pin)
-        if gpio_state:
-            state = 'High'
-        else:
-            state = 'Low'
-
-        return jsonify(state=state)
+        state = 'Low'
+    # Return current state
+    return jsonify(state=state)
 
 
 if __name__ == '__main__':
