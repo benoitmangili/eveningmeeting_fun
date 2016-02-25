@@ -4,9 +4,9 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Software Development</title>
+    <title>DiY IoT - Easy as Pi!</title>
 
-    <meta name="description" content="Software engineering lecture">
+    <meta name="description" content="DIY Raspberry Pi Stuff">
     <meta name="author" content="Benoit Mangili">
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -46,76 +46,112 @@
       <div class="slides">
  
         <section>
-          <h1>Software engineering</h1>
-        </section>
-
-        <section>
-          <img width="800em" data-src="img/bridge2.jpg" alt="Down arrow"/>
+          <h1>DIY IoT - Easy as Pi!</h1>
           <aside class="notes">
-            what does it mean to apply engineering techniques to software?<br/>
-            After all, we simply write some lines of code in files, compile it, and execute it. It's not like building a bridge...<br/>
-            Well, if you think about it, building a bridge can be done by simply linking bits of wood together...
+            You've heard about the internet of things. Today we will tell you how you can make it work for you. 
+            Hack your thermostat, automate tedious tasks like watering your plants, let your pi read out the weather, let your house send tweets when the alarm goes off, the opportunities are endless. And it is not that hard to get started!
+            In fact, today we'll show you how easy it is!
+          </aside>
+        </section>
+        
+        <section>
+          <p class="fragment">We want to be able to control things. Insert image of control cycle with sensor and actuator here.</p>
+          <p class="fragment">We want to be able to display things. Insert a mock picture of a gui with a graph and some buttons here.</p>
+
+          <aside class="notes">
+            We will do this today by using a raspberry pi. 
+            * We will start by showing you how the raspberry pi can talk to an actuator (a relay). 
+            * Then we'll show you how to control the actuator from a web app, rather than having to run the commands on the pi itself. 
+            * Then we'll go back to the other part of the control loop: the sensor. We'll use the pi to read in sensor data. 
+            * We'll display those sensor data in the web app.
+            * At the end we'll close the loop and bring it all together.
+            We are going to be using a temperature sensor to control the state of a lamp but of course you can extend this to anything you can imagine:
+            water your plants using a pump and a humidity sensor, text yourself a picture of a guest who is ringing your doorbell, whatever you can think of that has these basic components of a sensor and an actuator. Of course you can also just display data without acting on it.
+            If we make it through the end quickly enough we also have an all out crazy nuclear demo for you, involving twitter, speakers and yourselves.
           </aside>
         </section>
         <section>
-          <h1>Software engineering</h1>
-        <section>
-          <h1>Software engineering</h1>
-        </section>
-        <section>
-          <h1>Software engineering</h1>
-        </section>
-        <section>
-          <h1>Software engineering</h1>
-        <section>
-          <h1>Software engineering</h1>
-        </section>
-        <section>
-          <h1>Software engineering</h1>
-        </section>
-        </section>
-          
+          <!-- Part 1 -->
+          <section data-markdown>
+            <h1>Raspberry Pi Basics</h1> 
+            Insert picture of a raspberry pi here.
+            <aside class="notes">
+            Mention: 
+            It is a computer and a micro-controller.
+            It has pins that you can connect stuff to and you can control the state of the pins.
+            It comes with python.
+            </aside>
+         </section>
           <section>
+            <span>
             <pre class="python"><code data-trim contenteditable>
-def compare(arg_1, arg_2):
-    if arg_1 < arg_2:
-        return -1
-    if arg_1 > arg_2:
-        return 1
-    return 0
+import RPi.GPIO as GPIO
+# Set the pi to board mode
+GPIO.setmode(GPIO.BOARD)
+</code></pre>
+            </span>
+            <span class="fragment">
+            <pre class="python"><code data-trim contenteditable>
+# Set up
+pin = 36
+GPIO.setup(pin, GPIO.OUT)
+</code></pre>
+            </span>
+            <span class="fragment">
+            <pre class="python"><code data-trim contenteditable>
+# Set pin voltage to high
+GPIO.output(pin, GPIO.HIGH)
+</code></pre>
+            </span>
+            <span class="fragment">
+            <pre class="python"><code data-trim contenteditable>
+# Set pin voltage to low
+GPIO.output(pin, GPIO.LOW)
+</code></pre>
+            </span>
+            <span class="fragment">
+            <pre class="python"><code data-trim contenteditable>
+# Clear up
+GPIO.cleanup()
             </code></pre>
+          </span>
           </section>
-
-
-
-
-
-
-
           <section>
-            <h2>Purpose of the function</h2>
-            <pre class="highlight python">
-def foo(a, b, c):<span class="fragment zoom-in highlight-current-green">
-    s = []
-    f = open('my_file', 'r')
-    for l in f:
-        ll = l.split(',');
-        if ll[0] == 'bar':
-            s.append(ll)
-    f.close()</span><span class="fragment zoom-in highlight-current-green">
-    z = 0
-    for e in ll:
-        if ll[1] == 'foo':
-            z += 1
-        elif ll[2] == 'foo':
-            z += 1</span><span class="fragment zoom-in highlight-current-green">
-    f = open(b, 'w')
-    f.write('Report')
-    f.write('bar has been used properly {0} times.'.format(z)) 
-    f.close()</span></pre>
-          </section>
-
-
+          How do you know which pin is which?
+          Insert the image of pin diagramme here.
+        </section>
+       </section>
+       <section>
+            <h2>Part 2: Controlling the lamp via the web</h2>
+            <aside class="notes">
+            For people to type /on or /off to controll the lamp
+            </aside>
+       </section>
+       <section>
+            <h2>Part 3: A proper web app!</h2>
+            <aside class="notes">
+            Controlling the lamp with on/off buttons
+            </aside>
+       </section>
+       <section>
+            <h2>Part 4: The sensor</h2>
+            <section>
+              It's just reading a file!
+              But we can wrap it in a python class.
+            <aside class="notes">
+             show code snipped of file read
+            </aside>
+            </section>
+            <section>
+              Now show the temperature in the web app. We are almost there!
+            </section>            
+       </section>
+       <section>
+        <h2>Bringing it all together: a proper control loop!</h2>
+       </section>
+        <section>
+        <h2>Crazy town: let's vote on twitter whether to turn on "the heating"!</h2>
+       </section>
       </div>
 
     </div>
@@ -133,8 +169,8 @@ def foo(a, b, c):<span class="fragment zoom-in highlight-current-green">
         history: true,
         center: true,
 
-        parallaxBackgroundImage: 'img/6s.jpg', 
-        parallaxBackgroundSize: '1020px 654px',
+        parallaxBackgroundImage: 'img/xkcd.jpg', 
+        parallaxBackgroundSize: '1024px 768px',
 
         transition: 'slide', // none/fade/slide/convex/concave/zoom
 
