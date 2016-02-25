@@ -7,7 +7,7 @@ $(".OnButton").click(function() {
 
     $.ajax({
             url: "/lamp",
-            type: "post",
+            type: "put",
             data: json_on
         }).done(function (data) {
 
@@ -26,7 +26,7 @@ $(".OffButton").click(function() {
 
     $.ajax({
             url: "/lamp",
-            type: "post",
+            type: "put",
             data: json_off
         }).done(function (data) {
 

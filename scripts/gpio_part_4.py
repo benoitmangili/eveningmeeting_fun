@@ -47,9 +47,9 @@ def set_set_point():
 # add method that decides whether to turn the heater on or off
 # (don't call /lamp, wrap code to change pin state in function and reuse here.)
 
-@app.route('/lamp', methods=['GET', 'POST'])
+@app.route('/lamp', methods=['GET', 'PUT'])
 def lamp_stuff():
-    if request.method == 'POST':
+    if request.method == 'PUT':
         # Change state
         data = request.form
         state = data['state']
