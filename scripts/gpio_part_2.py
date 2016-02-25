@@ -41,8 +41,8 @@ def serve_static_file(filename):
 
 if __name__ == '__main__':
     try:
-        app.run(debug=True)
-        # app.run(host='0.0.0.0', port=8080, debug=True)
+        # app.run(debug=True)
+        app.run(host='0.0.0.0', port=8080, debug=True)
     finally:
         GPIO.cleanup()
         print "Bye."
