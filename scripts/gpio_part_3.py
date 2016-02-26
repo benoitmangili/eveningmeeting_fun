@@ -28,18 +28,29 @@ def lamp_stuff():
         data = request.form
         state = data['state']
 
-        if state == 'High':
-            gpio_state = GPIO.HIGH
-        elif state == 'Low':
-            gpio_state = GPIO.LOW
-        else:
-            print 'Invalid state!'
-            gpio_state = []
-            return
+        set_gpio_state(state)
 
-        GPIO.output(pin, gpio_state)
-        # Give the pin a moment to change state
-        sleep(0.01)
+    # confirm the state has been set
+    state = get_gpio_state(pin)
+
+    return jsonify(state=state)
+
+
+def set_gpio_state(state):
+    if state == 'High':
+        gpio_state = GPIO.HIGH
+    elif state == 'Low':
+        gpio_state = GPIO.LOW
+    else:
+        print 'Invalid state!'
+        gpio_state = []
+        return
+
+    GPIO.output(pin, gpio_state)
+    # Give the pin a moment to change state
+    sleep(0.01)
+
+def get_gpio_state(pin):
 
     # determines the state from the raspberry pi pin
     gpio_state = GPIO.input(pin)
@@ -47,8 +58,9 @@ def lamp_stuff():
         state = 'High'
     else:
         state = 'Low'
+
     # Return current state
-    return jsonify(state=state)
+    return state
 
 
 if __name__ == '__main__':
