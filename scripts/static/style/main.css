@@ -1,46 +1,37 @@
 h1 {
     text-align: center;
 }
-
 .jumbotron {
   height: 100%;
   border-radius: 50px;
-  background-color: #075D79;
+  background-color: #095079;
 }
 .buttons {
   background-color: #4f4f4f;
-  padding:120px;
-  margin-top: -33px;
-  margin-bottom: -33px;
+  padding:1%;
+  margin-top: 0;
+  margin-bottom: 0;
   border-radius: 50px
 }
 .circle {
     border-radius: 50%/50%; 
-    width: 50px;
-    height: 50px;
+    width: 200px;
+    height: 200px;
     background: black;
     margin: 0 auto;
 }
-
 .off {
   background: black;
 }
 .on {
   background: red;
 }
-
 body {
   background: black;
 }
 .button {
   cursor:pointer;
 }
-
 p {
   text-align: center;
-}
-
-#belowButtons {
-  color:white;
-    text-align: center;
 }
