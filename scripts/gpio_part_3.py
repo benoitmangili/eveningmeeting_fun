@@ -29,9 +29,9 @@ def lamp_stuff():
         state = data['state']
 
         if state == 'High':
-            gpio_state = GPIO.HIGH()
+            gpio_state = GPIO.HIGH
         elif state == 'Low':
-            gpio_state = GPIO.LOW()
+            gpio_state = GPIO.LOW
         else:
             print 'Invalid state!'
             gpio_state = []
@@ -53,7 +53,7 @@ def lamp_stuff():
 
 if __name__ == '__main__':
     try:
-        # app.run(debug=True)
+        # app.run()
         app.run(host='0.0.0.0', port=8080, debug=True)
     finally:
         GPIO.cleanup()

@@ -52,9 +52,9 @@ def twitter_vote():
     turn_on_heater = num_people_too_cold > num_people_too_hot
 
     if turn_on_heater:
-        gpio_state = GPIO.HIGH()
+        gpio_state = GPIO.HIGH
     else:
-        gpio_state = GPIO.LOW()
+        gpio_state = GPIO.LOW
 
     GPIO.output(pin, gpio_state)
 

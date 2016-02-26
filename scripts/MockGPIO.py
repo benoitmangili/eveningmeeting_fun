@@ -5,12 +5,15 @@ class MockGPIO(object):
 
     def __init__( self ):
         self.pin_state = dict()
+        self._HIGH=True
+        self._LOW=False
 
+    @property
     def HIGH(self):
-        return True
-
+        return self._HIGH
+    @property
     def LOW(self):
-        return False
+        return self._LOW
 
     def BOARD(self):
         return True

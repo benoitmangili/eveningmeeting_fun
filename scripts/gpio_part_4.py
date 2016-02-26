@@ -55,17 +55,17 @@ def lamp_stuff():
         state = data['state']
 
         if state == 'High':
-            gpio_state = GPIO.HIGH()
+            gpio_state = GPIO.HIGH
         elif state == 'Low':
-            gpio_state = GPIO.LOW()
+            gpio_state = GPIO.LOW
         else:
             print 'Invalid state!'
             gpio_state = []
-            pass  # TODO: escape the function at this point
+            return
 
         GPIO.output(pin, gpio_state)
         # Give the pin a moment to change state
-        sleep(0.001)
+        sleep(0.01)
 
     # determines the state from the raspberry pi pin
     gpio_state = GPIO.input(pin)
