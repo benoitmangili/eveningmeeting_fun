@@ -9,7 +9,7 @@ class Speaker():
         self.engine.setProperty('voice', 'english')
 
     def say(self, text_to_speak):
-    engine.say(text_to_speak)
-    engine.runAndWait()
+        self.engine.say(text_to_speak)
+        self.engine.runAndWait()
 
 
