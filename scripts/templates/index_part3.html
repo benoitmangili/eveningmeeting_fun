@@ -10,16 +10,19 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
 </head>
 <body>
-  <div class="jumbotron">
     <div class="container">
       <div class="row">
-         <p>The current temperature is... <span class="current_temperature"></span>!</p>
-         <div class="TemperatureButton">
-              <button type="button" class="btn btn-default btn-lg">Off</button>
-         </div>
+         <h1>The current temperature is... <span class="current_temperature"></span></h1>
+      </div>
+      <div class="row" style="text-align: center">
+        <div class="TemperatureButton">
+          <button type="button" class="btn btn-default btn-md">Get Temperature</button>
+        </div>
       </div>
     </div>
-  </div>
+    <div class="container">
+        <h2>Insert graph here....<h2>
+    </div>
 
   <script scr="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="{{ url_for('static', filename='js/scripts_3.js') }}"></script>

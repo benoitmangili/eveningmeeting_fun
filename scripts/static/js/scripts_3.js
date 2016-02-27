@@ -7,7 +7,7 @@ $(".TemperatureButton").click(function() {
             type: "get",
         }).done(function (data) {
 
-        $( ".TemperatureButton" ).text( data.value );
+        $( ".current_temperature" ).text( data.value + "degC" );
 
     });
 });
