@@ -53,7 +53,6 @@
             In fact, today we'll show you how easy it is!
           </aside>
         </section>
-        
         <section>
           <p class="fragment">We want to be able to control things. Insert image of control cycle with sensor and actuator here.</p>
           <p class="fragment">We want to be able to display things. Insert a mock picture of a gui with a graph and some buttons here.</p>
@@ -70,20 +69,23 @@
             If we make it through the end quickly enough we also have an all out crazy nuclear demo for you, involving twitter, speakers and yourselves.
           </aside>
         </section>
+        <!-- Part 1 -->
         <section>
-          <!-- Part 1 -->
-          <section data-markdown>
-            <h1>Raspberry Pi Basics</h1> 
-            Insert picture of a raspberry pi here.
-            <aside class="notes">
-            Mention: 
-            It is a computer and a micro-controller.
-            It has pins that you can connect stuff to and you can control the state of the pins.
-            It comes with python.
-            </aside>
-         </section>
-          <section>
-            <span>
+            <section>
+                <h2>Part 1: Controll a switch with the Pi</h2>
+            </section>
+            <section data-markdown>
+              <h1>Raspberry Pi Basics</h1> 
+              Insert picture of a raspberry pi here.
+              <aside class="notes">
+              Mention: 
+              It is a computer and a micro-controller.
+              It has pins that you can connect stuff to and you can control the state of the pins.
+              It comes with python.
+              </aside>
+            </section>
+            <section>
+            <span class="fragment">
             <pre class="python"><code data-trim contenteditable>
 import RPi.GPIO as GPIO
 # Set the pi to board mode
@@ -115,42 +117,59 @@ GPIO.output(pin, GPIO.LOW)
 GPIO.cleanup()
             </code></pre>
           </span>
-          </section>
-          <section>
-          How do you know which pin is which?
-          Insert the image of pin diagramme here.
+            </section>
+            <section>
+                How do you know which pin is which?
+                Insert the image of pin diagramme here.
+            </section>
+       </section>
+       <!-- Part 2 -->
+       <section>
+           <section>
+              <h2>Part 2: Controlling a lamp via the web</h2>
+              <aside class="notes">
+              For people to type /on or /off to controll the lamp
+              </aside>
+           </section>
         </section>
-       </section>
-       <section>
-            <h2>Part 2: Controlling the lamp via the web</h2>
-            <aside class="notes">
-            For people to type /on or /off to controll the lamp
-            </aside>
-       </section>
-       <section>
-            <h2>Part 3: A proper web app!</h2>
-            <aside class="notes">
-            Controlling the lamp with on/off buttons
-            </aside>
-       </section>
-       <section>
-            <h2>Part 4: The sensor</h2>
+        <!-- Part 3 -->
+        <section>
+            <section>
+                <h2>Part 3: A proper web app!</h2>
+                <aside class="notes">
+                Controlling the lamp with on/off buttons
+                </aside>
+            </section>
+            <section>
+              TBD....
+            </section>
+        </section>
+        <!-- Part 4 -->
+        <section>
+            <section>
+                <h2>Part 4: The sensor</h2>
+            </section>
             <section>
               It's just reading a file!
               But we can wrap it in a python class.
-            <aside class="notes">
-             show code snipped of file read
-            </aside>
+              <aside class="notes">
+              show code snipped of file read
+              </aside>
             </section>
             <section>
               Now show the temperature in the web app. We are almost there!
-            </section>            
-       </section>
+            </section>
+         </section>              
        <section>
         <h2>Bringing it all together: a proper control loop!</h2>
+        <aside class="notes">
+              Set set point and dip sensor in ice water and warm it up by hand.
+         </aside>
        </section>
+       <!-- Part 5 -->
         <section>
-        <h2>Crazy town: let's vote on twitter whether to turn on "the heating"!</h2>
+        <h2>Bonus level unlocked:</h2>
+        <h3>Let's vote on twitter whether to turn on "the heating"!</h3>
        </section>
       </div>
 
