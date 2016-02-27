@@ -1,9 +1,5 @@
-from flask import Flask, request, jsonify, render_template, url_for, redirect
+from flask import Flask, request, jsonify, render_template
 from time import sleep
-# Can only use DS18B20 on the raspberry pi
-#from sensor.sensor import DS18B20 as sensor
-from sensor.DummySensor import DummySensor as sensor
-
 try:
    import RPi.GPIO as GPIO
 except:
@@ -16,36 +12,14 @@ pin = 36
 
 GPIO.setup(pin, GPIO.OUT)
 
-# Instantiate Sensor Class
-sensor = sensor()
-
 app = Flask(__name__)
 
-threshold = []
 
-# Load index page
+# Return hello world to the index page
 @app.route('/')
-def index():
-    return render_template('index_part3.html')
+def hello_world():
+    return render_template('index_part2b.html')
 
-
-@app.route('/temperature')
-def measure_temperature():
-    measurement = sensor.getMeasurement()
-    return jsonify(value=measurement.value, time=measurement.timeStamp)
-
-
-@app.route('/set_point', methods=['GET', 'PUT'])
-def set_set_point():
-    global threshold
-    if request.method == 'POST':
-        data = request.form
-        threshold = data['set_point']
-    else:
-        return jsonify(threshold=threshold)
-
-# add method that decides whether to turn the heater on or off
-# (don't call /lamp, wrap code to change pin state in function and reuse here.)
 
 @app.route('/lamp', methods=['GET', 'PUT'])
 def lamp_stuff():
@@ -60,6 +34,7 @@ def lamp_stuff():
     state = get_gpio_state(pin)
 
     return jsonify(state=state)
+
 
 def set_gpio_state(state):
     if state == 'High':
@@ -87,9 +62,10 @@ def get_gpio_state(pin):
     # Return current state
     return state
 
+
 if __name__ == '__main__':
     try:
-        # app.run(debug=True)
+        # app.run()
         app.run(host='0.0.0.0', port=8080, debug=True)
     finally:
         GPIO.cleanup()
