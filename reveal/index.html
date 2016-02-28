@@ -185,7 +185,7 @@ def turn_me_off():
               </aside>
             </section>
             <section>
-                <h2>Have a go!</h2>
+                <h2>Let's have a go!</h2>
                 <h3>192.168.0.105:8080</h3>
                 <h3>192.168.0.105:8080/lamp/on</h3>
                 <h3>192.168.0.105:8080/lamp/off</h3>
@@ -287,7 +287,7 @@ def lamp_stuff():
 </code></pre>
            </section>
             <section>
-                <h2>Have a go!</h2>
+                <h2>Let's have a go!</h2>
                 <h3>192.168.0.105:8080</h3>
             </section>
         </section>
@@ -380,7 +380,7 @@ $("#temperatureBtn").click(function() {
             </code></pre>
             </section>
             <section>
-                <h2>Have a go!</h2>
+                <h2>Let's have a go!</h2>
                 <h3>192.168.0.105:8080</h3>
             </section>
          </section> 
@@ -394,17 +394,27 @@ $("#temperatureBtn").click(function() {
          </aside>
            </section>
        <section>
-           <span class="fragment">
               <pre class="python"><code data-trim contenteditable>
 from Controller import Controller
 # Instantiate Controller Class
-t_lower = 15
-t_upper = 20
-controller = Controller(t_lower, t_upper)
+set_lower = 15
+set_upper = 20
+controller = Controller(sest_lower, set_upper)
                </code></pre>
-           </span>
+        </section>
+           <section>
+               <img class="stretch" data-src="img/controller_sketch.png">
            <span class="fragment">
+               </span>
+           </section>
+           <section>
            <pre class="python"><code data-trim contenteditable>
+from Controller import Controller
+# Instantiate Controller Class
+sest_lower = 15
+set_upper = 20
+controller = Controller(sest_lower, set_upper)
+
 def get_heater_command():
     # Returns true if the heater is to be turned on or false otherwise
     measurement = sensor.getMeasurement()
@@ -413,6 +423,11 @@ def get_heater_command():
                </code></pre>
                 </span>
        </section>
+       <section>
+        <h2>Let's have a go!</h2>
+        <img class="stretch" data-src="img/ice_bucket_challenge.jpg">
+
+      </section>
        </section>
        <!-- Part 5 -->
         <section>
