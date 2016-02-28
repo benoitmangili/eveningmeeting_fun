@@ -66,6 +66,7 @@ var update_set_point_display = function(data){
     max_temp = data['set_point_upper'];
     $('#min_value').html(min_temp)
     $('#max_value').html(max_temp)
+    update_limits({min_temp, max_temp});
   }
 
 var update_set_point_min_up   = function(){ update_set_point(min_temp+1, max_temp  ); }
@@ -73,7 +74,7 @@ var update_set_point_min_down = function(){ update_set_point(min_temp-1, max_tem
 var update_set_point_max_up   = function(){ update_set_point(min_temp  , max_temp+1); }
 var update_set_point_max_down = function(){ update_set_point(min_temp  , max_temp-1); }
 
-
+var tempo = 1000;
 var start_plot_loop = function() {
   if (!controllerIsRunning){
     graphInterval = setInterval(function() {
@@ -81,10 +82,10 @@ var start_plot_loop = function() {
               url: "/temperature",
               type: "get",
       }).done(function (data) {
-        if (temps.push(data) > 10 ) temps.shift()
-        // plot(temps)
+        // if (temps.push(data) > 10 ) temps.shift()
+        plot({datum: data}, tempo)
       });
-    }, 5000);
+    }, tempo);
   }
 }
 
