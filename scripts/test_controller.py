@@ -19,14 +19,14 @@ class TestController:
         t_lower = 15
         t_upper = 18
         c = Controller(t_lower, t_upper)
-        c.get_command(16)
-        assert c.get_command(17) == True
+        c.get_command(14)
+        assert c.get_command(15) == True
 
     def test_hysteresis_from_above(self):
         t_lower = 15
         t_upper = 18
         c = Controller(t_lower, t_upper)
-        c.get_command(17.5)
+        c.get_command(19)
         assert c.get_command(16) == False
 
     def test_first_measurement_in_range(self):
