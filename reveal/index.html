@@ -46,43 +46,52 @@
       <div class="slides">
  
         <section>
-          <h1>DIY IoT - Easy as Pi!</h1>
-          <aside class="notes">
-            You've heard about the internet of things. Today we will tell you how you can make it work for you. 
-            Hack your thermostat, automate tedious tasks like watering your plants, let your pi read out the weather, let your house send tweets when the alarm goes off, the opportunities are endless. And it is not that hard to get started!
-            In fact, today we'll show you how easy it is!
-          </aside>
-        </section>
-        <section>
-          <p class="fragment">We want to be able to control things. Insert image of control cycle with sensor and actuator here.</p>
-          <p class="fragment">We want to be able to display things. Insert a mock picture of a gui with a graph and some buttons here.</p>
+            <section>
+              <h1>DIY IoT - Easy as Pi!</h1>
+              <aside class="notes">
+                You've heard about the internet of things. Today we will tell you how you can make it work for you.
+                Hack your thermostat, automate tedious tasks like watering your plants, let your pi read out the weather, let your house send tweets when the alarm goes off, the opportunities are endless. And it is not that hard to get started!
+                In fact, today we'll show you how easy it is!
+              </aside>
+            </section>
 
-          <aside class="notes">
-            We will do this today by using a raspberry pi. 
-            * We will start by showing you how the raspberry pi can talk to an actuator (a relay). 
-            * Then we'll show you how to control the actuator from a web app, rather than having to run the commands on the pi itself. 
-            * Then we'll go back to the other part of the control loop: the sensor. We'll use the pi to read in sensor data. 
-            * We'll display those sensor data in the web app.
-            * At the end we'll close the loop and bring it all together.
-            We are going to be using a temperature sensor to control the state of a lamp but of course you can extend this to anything you can imagine:
-            water your plants using a pump and a humidity sensor, text yourself a picture of a guest who is ringing your doorbell, whatever you can think of that has these basic components of a sensor and an actuator. Of course you can also just display data without acting on it.
-            If we make it through the end quickly enough we also have an all out crazy nuclear demo for you, involving twitter, speakers and yourselves.
-          </aside>
+            <section>
+              <img class="stretch" data-src="img/control_loop_plain.png">
+              <aside class="notes">
+                We will do this today by using a raspberry pi.
+                * We will start by showing you how the raspberry pi can talk to an actuator (a relay).
+                * Then we'll show you how to control the actuator from a web app, rather than having to run the commands on the pi itself.
+                * Then we'll go back to the other part of the control loop: the sensor. We'll use the pi to read in sensor data.
+                * We'll display those sensor data in the web app.
+                * At the end we'll close the loop and bring it all together.
+                We are going to be using a temperature sensor to control the state of a lamp but of course you can extend this to anything you can imagine:
+                water your plants using a pump and a humidity sensor, text yourself a picture of a guest who is ringing your doorbell, whatever you can think of that has these basic components of a sensor and an actuator. Of course you can also just display data without acting on it.
+                If we make it through the end quickly enough we also have an all out crazy nuclear demo for you, involving twitter, speakers and yourselves.
+              </aside>
+            </section>
+            <section>
+                <img class="stretch" data-src="img/complex_gui.jpg">
+            </section>
         </section>
         <!-- Part 1 -->
         <section>
             <section>
-                <h2>Part 1: Controll a switch with the Pi</h2>
+                <h2>Part 1: Controll a Lamp with the Pi</h2>
+                <img class="stretch" data-src="img/control_loop_A.png">
+
             </section>
             <section>
-              <h1>Raspberry Pi Basics</h1>
-                  <img data-src="img/raspberry_pi.jpeg">
+                  <img class="stretch"  data-src="img/raspberry_pi.jpeg">
               <aside class="notes">
-              Mention: 
+              Raspberry Pi Basics:
               It is a computer and a micro-controller.
+                  Invented in the uk.
               It has pins that you can connect stuff to and you can control the state of the pins.
               It comes with python.
               </aside>
+            </section>
+            <section>
+                Insert frizzing diagram of setup here.
             </section>
             <section>
             <span class="fragment">
@@ -120,24 +129,26 @@ GPIO.cleanup()
             </section>
             <section>
                 <h3>How do you know which pin is which?</h3>
+                <!--TODO: This image needs to be bigger-->
                 <img class="stretch" data-src="img/GPIO_Layout.png">
             </section>
        </section>
        <!-- Part 2 -->
        <section>
-           <section>
+            <section>
               <h2>Part 2: Controlling a lamp via the web</h2>
+                  <img class="stretch" data-src="img/control_loop_A.png">
               <aside class="notes">
+                  For your reference: We are still in the part where we control the actuator but now
+                  we want to do it via the web.
               For people to type /on or /off to controll the lamp
               </aside>
-           </section>
+            </section>
             <section>
-
             <pre class="python"><code data-trim contenteditable>
 from flask import Flask
 app = Flask(__name__)
 </code></pre>
-
             <span class="fragment">
             <pre class="python"><code data-trim contenteditable>
 # Return hello world to the index page
@@ -211,7 +222,7 @@ def lamp_stuff():
             </span>
             <span class="fragment">
             <pre class="python"><code data-trim contenteditable>
-        app.run(host='0.0.0.0', port=8080, debug=True)
+app.run(host='0.0.0.0', port=8080, debug=True)
             </code></pre>
           </span>
             <aside class="notes">
@@ -224,26 +235,44 @@ def lamp_stuff():
         <section>
             <section>
                 <h2>Part 3: The sensor</h2>
+                <img class="stretch" data-src="img/control_loop_S.png">
+            </section>
+            <section>
+                Insert frizzing diagram of setup here.
             </section>
             <section>
               It's just reading a file!
+<span class="fragment">
+            <pre class="python"><code data-trim contenteditable>
+sudo cat /sys/bus/w1/devices/&ltdevice_number&gt/w1_slave
+            </code></pre>
+          </span>
               <aside class="notes">
-              show code snipped of file read
+              show code snipped of file read. How do I know the device name: folder thtat starts with 28 and pops up
+                  in devices folder when you plug in the device. use pin 4 for w1
+
               </aside>
             </section>
             <section>
               But we can wrap it in a python class.
              <aside class="notes">
-              There are different protocolls for talking to devices, w1, i2c, etc. the pi has a lot of these available.
+              There are different protocols for talking to devices, w1, i2c, etc. the pi has a lot of these available.
               </aside>  
             </section>
             <section>
-              Now show the temperature in the web app. We are almost there!
+              Now let's look at the temperature in the web app. We are almost there!
+                <pre class="python"><code data-trim contenteditable>
+@app.route('/temperature')
+def measure_temperature():
+    measurement = sensor.getMeasurement()
+    return jsonify(value=measurement.value, time=measurement.timeStamp)
+               </code></pre>
             </section>
          </section> 
        <!-- Part 4 -->               
        <section>
         <h2>Part 4: Bringing it all together - a proper control loop!</h2>
+           <img class="stretch" data-src="img/control_loop_C.png">
         <aside class="notes">
               Set set point and dip sensor in ice water and warm it up by hand.
          </aside>
