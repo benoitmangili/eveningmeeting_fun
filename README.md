@@ -45,10 +45,6 @@
 - more interesting things to mention:
 GPIO zero
 
-
-- tell Iain to shut up about his Nest (http://www.bbc.co.uk/news/technology-35311447)
-
-
 ## We need
 - lamp (Benoit)
 - an audio output cable (anniek + benoit), might not end up using this
