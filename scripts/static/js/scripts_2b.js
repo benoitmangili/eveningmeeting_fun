@@ -8,7 +8,8 @@ $(".OnButton").click(function() {
     $.ajax({
             url: "/lamp",
             type: "put",
-            data: json_on
+            data: JSON.stringify(json_on),
+            dataType: "json",
         }).done(function (data) {
 
         // Only turn on the LED image on the website if the server turned on the real one
@@ -27,7 +28,8 @@ $(".OffButton").click(function() {
     $.ajax({
             url: "/lamp",
             type: "put",
-            data: json_off
+            data: JSON.stringify(json_off),
+            dataType: "json",
         }).done(function (data) {
 
         // Only turn on the LED image on the website if the server turned on the real one

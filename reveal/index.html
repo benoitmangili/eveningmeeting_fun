@@ -41,6 +41,7 @@
                 Hack your thermostat, automate tedious tasks like watering your plants, let your pi read out the weather, let your house send tweets when the alarm goes off, the opportunities are endless. And it is not that hard to get started!
                 In fact, today we'll show you how easy it is!
               </aside>
+                <div>Network: evening_fun, Password: opihr</div>
             </section>
 
             <section>
@@ -56,9 +57,11 @@
                 water your plants using a pump and a humidity sensor, text yourself a picture of a guest who is ringing your doorbell, whatever you can think of that has these basic components of a sensor and an actuator. Of course you can also just display data without acting on it.
                 If we make it through the end quickly enough we also have an all out crazy nuclear demo for you, involving twitter, speakers and yourselves.
               </aside>
+                <div>Network: evening_fun, Password: opihr</div>
             </section>
             <section>
-                <img class="stretch" data-src="img/complex_gui.jpg">
+                <img class="stretch" data-src="img/jarvis.png">
+                <div>Network: evening_fun, Password: opihr</div>
             </section>
         </section>
         <!-- Part 1 -->
@@ -128,7 +131,8 @@ GPIO.cleanup()
                 <img class="stretch" data-src="img/GPIO_Layout.png">
                 <a href="https://pinout.xyz/">https://pinout.xyz/</a>
             </section>
-       </section>
+        </section>
+
        <!-- Part 2 -->
        <section>
             <section>
@@ -179,6 +183,12 @@ def turn_me_off():
               Tell people this only works within the wifi network (which is usually a good thing).
                   It is possible to open up a port to the outside world but then need to be careful about safety.
               </aside>
+            </section>
+            <section>
+                <h2>Have a go!</h2>
+                <h3>192.168.0.105:8080</h3>
+                <h3>192.168.0.105:8080/lamp/on</h3>
+                <h3>192.168.0.105:8080/lamp/off</h3>
             </section>
             <section>
                 <h2>Now using a proper web app!</h2>
@@ -248,7 +258,7 @@ $(".OnButton").click(function() {
     $.ajax({
             url: "/lamp",
             type: "put",
-            data: {"state":"High"}
+            data: JSON.stringify({"state":"High"})
         }).done(function (data) {
         // Set virtual LED state
         if (data.state === 'High'){
@@ -276,6 +286,10 @@ def lamp_stuff():
     return jsonify(state=state)
 </code></pre>
            </section>
+            <section>
+                <h2>Have a go!</h2>
+                <h3>192.168.0.105:8080</h3>
+            </section>
         </section>
         <!-- Part 3 -->
         <section>
@@ -344,6 +358,30 @@ def measure_temperature():
     return jsonify(value=measurement.value, time=measurement.timeStamp)
                </code></pre>
                 </span>
+            </section>
+            <section>
+                <h4>HTML</h4>
+                <pre class="html"><code data-trim contenteditable>
+&ltdiv class='bigButton' id='temperatureBtn'&gt
+    &ltdiv id="current_temperature"&gtGet temperature&lt/div&gt
+&lt/div&gt
+            </code></pre>
+                <h4>JS</h4>
+                <pre class="hljs"><code data-trim contenteditable>
+$("#temperatureBtn").click(function() {
+      $.ajax({
+              url: "/temperature",
+              type: "get",
+      }).done(function (data) {
+        $( "#current_temperature" ).text( data.value.toFixed(2) + "°C" );
+        $( "#graphBtn" ).show();
+      });
+  });
+            </code></pre>
+            </section>
+            <section>
+                <h2>Have a go!</h2>
+                <h3>192.168.0.105:8080</h3>
             </section>
          </section> 
        <!-- Part 4 -->               
