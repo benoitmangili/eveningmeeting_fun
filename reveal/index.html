@@ -132,12 +132,12 @@ GPIO.cleanup()
               </aside>
            </section>
             <section>
-            <span class="fragment">
+
             <pre class="python"><code data-trim contenteditable>
 from flask import Flask
 app = Flask(__name__)
 </code></pre>
-            </span>
+
             <span class="fragment">
             <pre class="python"><code data-trim contenteditable>
 # Return hello world to the index page
@@ -149,28 +149,75 @@ def hello_world():
             </span>
             <span class="fragment">
             <pre class="python"><code data-trim contenteditable>
-# Set pin voltage to high
-GPIO.output(pin, GPIO.HIGH)
+@app.route('/lamp/on')
+def turn_me_on():
+    GPIO.output(pin, GPIO.HIGH)
+    return '<h1 align="center">Turning the lamp on</h1>'
 </code></pre>
             </span>
             <span class="fragment">
             <pre class="python"><code data-trim contenteditable>
-# Set pin voltage to low
-GPIO.output(pin, GPIO.LOW)
+@app.route('/lamp/off')
+def turn_me_off():
+    GPIO.output(pin, GPIO.LOW)
+    return '<h1 align="center">Turning the lamp off</h1>'
 </code></pre>
             </span>
             <span class="fragment">
             <pre class="python"><code data-trim contenteditable>
-# Clear up
-GPIO.cleanup()
+        app.run(host='0.0.0.0', port=8080, debug=True)
             </code></pre>
           </span>
+              <aside class="notes">
+              Tell people this only works within the wifi network (which is usualy a good thing).
+                  It is possible to open up a port to the outside world but then need to be careful about safety.
+              </aside>
             </section>
             <section>
                 <h2>Now using a proper web app!</h2>
                 <aside class="notes">
                 Controlling the lamp with on/off buttons
                 </aside>
+            </section>
+            <section>
+
+            <pre class="python"><code data-trim contenteditable>
+from flask import Flask, request, jsonify, render_template
+</code></pre>
+
+            <span class="fragment">
+            <pre class="python"><code data-trim contenteditable>
+@app.route('/')
+def hello_world():
+    return render_template('index_part2b.html')
+</code></pre>
+            </span>
+            <span class="fragment">
+            <pre class="python"><code data-trim contenteditable>
+@app.route('/lamp', methods=['GET', 'PUT'])
+def lamp_stuff():
+    if request.method == 'PUT':
+        # Change state
+        data = request.form
+        state = data['state']
+
+        set_gpio_state(state)
+
+    # confirm the state has been set
+    state = get_gpio_state(pin)
+
+    return jsonify(state=state)
+</code></pre>
+            </span>
+            <span class="fragment">
+            <pre class="python"><code data-trim contenteditable>
+        app.run(host='0.0.0.0', port=8080, debug=True)
+            </code></pre>
+          </span>
+            <aside class="notes">
+            Tell people how it works: Javascript registers button click -> sends request to server to change state -> server changes state
+            (-> server returns changed state info -> javascript changes css to change red circle colour)
+           </aside>
             </section>
         </section>
         <!-- Part 3 -->
