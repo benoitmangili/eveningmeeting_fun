@@ -6,12 +6,12 @@ class TestMockGPIO:
 
     def test_state_high(self):
         m = MockGPIO.MockGPIO()
-        assert m.HIGH() == True
+        assert m.HIGH == True
 
 
     def test_state_low(self):
         m = MockGPIO.MockGPIO()
-        assert m.LOW() == False
+        assert m.LOW == False
 
     def test_default_state(self):
         m = MockGPIO.MockGPIO()
