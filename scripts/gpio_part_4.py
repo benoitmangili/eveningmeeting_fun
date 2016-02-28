@@ -26,8 +26,6 @@ controller = Controller(t_lower, t_upper)
 
 app = Flask(__name__)
 
-threshold = []
-
 # Load index page
 @app.route('/')
 def index():
@@ -49,8 +47,8 @@ def set_set_point():
         set_point_lower = data['set_point_lower']
         controller.update_temperature_range(set_point_lower, set_point_upper)
     else:
-        set_point_upper = controller.set_point_upper()
-        set_point_lower = controller.set_point_lower()
+        set_point_upper = controller.set_point_upper
+        set_point_lower = controller.set_point_lower
         return jsonify(set_point_upper=set_point_upper,set_point_lower=set_point_lower)
 
 
