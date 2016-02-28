@@ -23,6 +23,8 @@ GPIO.setup(pin, GPIO.OUT)
 # Instantiate Sensor Class
 sensor = sensor()
 
+process = None
+
 # Instantiate Controller Class
 t_lower = 15
 t_upper = 20
@@ -44,7 +46,6 @@ def measure_temperature():
 
 @app.route('/set_point', methods=['GET', 'PUT'])
 def set_set_point():
-    global threshold
     if request.method == 'PUT':
         data = request.form
         set_point_upper = data['set_point_upper']
@@ -73,17 +74,20 @@ def lamp_stuff():
 
 @app.route('/temperature_thread', methods=['GET', 'PUT'])
 def control_temperature_thread():
+    global process
     if request.method == 'PUT':
         # Might need to change the location of the data in the request
         data = request.form
         command = data['thread_command']
-        if command == 'Start':
-            time_update=1
+        if command == 'Start' and not process:
+            time_update = 1
             process = PeriodicTimer(time_update, control_gpio_state)
             process.start()
         else:
-            if 'process' in locals():
+            try:
                 process.cancel()
+            except:
+                print "Process did not exist yet"
     else:
         pass
 
@@ -114,21 +118,17 @@ def get_gpio_state(pin):
     # Return current state
     return state
 
-
 def get_heater_command():
     # Returns true if the heater is to be turned on or false otherwise
     measurement = sensor.getMeasurement()
     command = controller.get_command(measurement.value)
     return command
 
-
 def control_gpio_state():
     command = get_heater_command()
     GPIO.output(pin, command)
     state = get_gpio_state(pin)
-    print state
     return state
-
 
 if __name__ == '__main__':
     try:
