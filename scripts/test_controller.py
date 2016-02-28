@@ -40,5 +40,5 @@ class TestController:
         t_upper = 18
         c = Controller(t_lower, t_upper)
         c.update_temperature_range(16,17)
-        assert c.var_lower == 16
-        assert c.var_upper == 17
+        assert c.set_point_lower == 16
+        assert c.set_point_upper == 17

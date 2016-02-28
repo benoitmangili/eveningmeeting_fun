@@ -1,9 +1,9 @@
 
 class Controller:
     """ Controller """
-    def __init__(self, var_lower, var_upper):
-        self.var_lower = var_lower
-        self.var_upper = var_upper
+    def __init__(self, set_point_lower, set_point_upper):
+        self.set_point_lower = set_point_lower
+        self.set_point_upper = set_point_upper
         self._var_prev = []
 
     def get_command(self, var_current):
@@ -12,9 +12,9 @@ class Controller:
             self._var_prev = var_current
 
         # If the temperature is below temp_lower, give on command
-        if var_current<self.var_lower:
+        if var_current<self.set_point_lower:
             command = True
-        elif var_current > self.var_upper:
+        elif var_current > self.set_point_upper:
             command = False
         elif var_current > self._var_prev:
             command = True
@@ -24,6 +24,6 @@ class Controller:
         self._var_prev = var_current
         return command
 
-    def update_temperature_range(self, var_lower, var_upper):
-        self.var_lower = var_lower
-        self.var_upper = var_upper
+    def update_temperature_range(self, set_point_lower, set_point_upper):
+        self.set_point_lower = set_point_lower
+        self.set_point_upper = set_point_upper
