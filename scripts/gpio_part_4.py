@@ -1,9 +1,13 @@
 from flask import Flask, request, jsonify, render_template, url_for, redirect
 from time import sleep
+import json
 # Can only use DS18B20 on the raspberry pi
 #from sensor.sensor import DS18B20 as sensor
+# TODO: comment the real sensor in!!!
 from sensor.DummySensor import DummySensor as sensor
 from Controller import Controller
+from PeriodicTimer import PeriodicTimer
+
 try:
    import RPi.GPIO as GPIO
 except:
@@ -41,7 +45,7 @@ def measure_temperature():
 @app.route('/set_point', methods=['GET', 'PUT'])
 def set_set_point():
     global threshold
-    if request.method == 'POST':
+    if request.method == 'PUT':
         data = request.form
         set_point_upper = data['set_point_upper']
         set_point_lower = data['set_point_lower']
@@ -66,6 +70,24 @@ def lamp_stuff():
 
     return jsonify(state=state)
 
+
+@app.route('/temperature_thread', methods=['GET', 'PUT'])
+def control_temperature_thread():
+    if request.method == 'PUT':
+        # Might need to change the location of the data in the request
+        data = request.form
+        command = data['thread_command']
+        if command == 'Start':
+            time_update=1
+            process = PeriodicTimer(time_update, control_gpio_state)
+            process.start()
+        else:
+            if 'process' in locals():
+                process.cancel()
+    else:
+        pass
+
+
 def set_gpio_state(state):
     if state == 'High':
         gpio_state = GPIO.HIGH
@@ -80,6 +102,7 @@ def set_gpio_state(state):
     # Give the pin a moment to change state
     sleep(0.01)
 
+
 def get_gpio_state(pin):
 
     # determines the state from the raspberry pi pin
@@ -88,7 +111,6 @@ def get_gpio_state(pin):
         state = 'High'
     else:
         state = 'Low'
-
     # Return current state
     return state
 
@@ -99,10 +121,20 @@ def get_heater_command():
     command = controller.get_command(measurement.value)
     return command
 
+
+def control_gpio_state():
+    command = get_heater_command()
+    GPIO.output(pin, command)
+    state = get_gpio_state(pin)
+    print state
+    return state
+
+
 if __name__ == '__main__':
     try:
         # app.run(debug=True)
         app.run(host='0.0.0.0', port=8080, debug=True)
+
     finally:
         GPIO.cleanup()
         print "Bye."
