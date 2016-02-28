@@ -74,9 +74,9 @@
             <section>
                 <h2>Part 1: Controll a switch with the Pi</h2>
             </section>
-            <section data-markdown>
-              <h1>Raspberry Pi Basics</h1> 
-              Insert picture of a raspberry pi here.
+            <section>
+              <h1>Raspberry Pi Basics</h1>
+                  <img data-src="img/raspberry_pi.jpeg">
               <aside class="notes">
               Mention: 
               It is a computer and a micro-controller.
@@ -119,8 +119,8 @@ GPIO.cleanup()
           </span>
             </section>
             <section>
-                How do you know which pin is which?
-                Insert the image of pin diagramme here.
+                <h3>How do you know which pin is which?</h3>
+                <img class="stretch" data-src="img/GPIO_Layout.png">
             </section>
        </section>
        <!-- Part 2 -->
@@ -131,6 +131,41 @@ GPIO.cleanup()
               For people to type /on or /off to controll the lamp
               </aside>
            </section>
+            <section>
+            <span class="fragment">
+            <pre class="python"><code data-trim contenteditable>
+from flask import Flask
+app = Flask(__name__)
+</code></pre>
+            </span>
+            <span class="fragment">
+            <pre class="python"><code data-trim contenteditable>
+# Return hello world to the index page
+@app.route('/')
+def hello_world():
+    return '<h1 align="center">Greetings, Stevenage Branch!</h1>' \
+           '<p align="center">We hope you enjoy the show!</p>'
+</code></pre>
+            </span>
+            <span class="fragment">
+            <pre class="python"><code data-trim contenteditable>
+# Set pin voltage to high
+GPIO.output(pin, GPIO.HIGH)
+</code></pre>
+            </span>
+            <span class="fragment">
+            <pre class="python"><code data-trim contenteditable>
+# Set pin voltage to low
+GPIO.output(pin, GPIO.LOW)
+</code></pre>
+            </span>
+            <span class="fragment">
+            <pre class="python"><code data-trim contenteditable>
+# Clear up
+GPIO.cleanup()
+            </code></pre>
+          </span>
+            </section>
             <section>
                 <h2>Now using a proper web app!</h2>
                 <aside class="notes">
@@ -187,10 +222,18 @@ GPIO.cleanup()
         progress: true,
         history: true,
         center: true,
+        slideNumber: true,
+        overview: true,
 
-        parallaxBackgroundImage: 'img/xkcd.jpg', 
-        parallaxBackgroundSize: '1024px 768px',
+        //parallaxBackgroundImage: 'img/xkcd.jpg',
+        //parallaxBackgroundSize: '1024px 768px',
 
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        // Bounds for smallest/largest possible scale to apply to content
+        minScale: 0.2,
+        maxScale: 1.5,
         transition: 'slide', // none/fade/slide/convex/concave/zoom
 
         // Optional reveal.js plugins
