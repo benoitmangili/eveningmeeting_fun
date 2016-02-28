@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify, render_template, url_for, redirect
-from time import sleep
 # Can only use DS18B20 on the raspberry pi
 #from sensor.sensor import DS18B20 as sensor
 from sensor.DummySensor import DummySensor as sensor
@@ -31,6 +30,8 @@ def index():
 @app.route('/temperature')
 def measure_temperature():
     measurement = sensor.getMeasurement()
+    import random
+    measurement.value = random.random()*10
     return jsonify(value=measurement.value, time=measurement.timeStamp)
 
 

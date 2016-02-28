@@ -1,4 +1,5 @@
-from flask import Flask
+from flask import Flask, request, jsonify, render_template, url_for, redirect
+
 from twitter.Twitter import Twitter
 import json
 try:
@@ -16,13 +17,16 @@ pin = 36
 GPIO.setup(pin, GPIO.OUT)
 
 app = Flask(__name__)
+from flask_socketio import SocketIO, send
+
+app.config['SECRET_KEY'] = 'evening_fun'
+socketio = SocketIO(app)
 
 
 # Return hello world to the index page
 @app.route('/')
 def hello_world():
-    return '<h1>Greetings, Stevenage Branch!</h1>' \
-           '<p>We hope you enjoy the show!</p>'
+    return render_template('index_part5.html')
 
 # Can be used for the life update stream of tweets
 @app.route('/get_tweets/<int:num_tweets>')
@@ -58,11 +62,28 @@ def twitter_vote():
 
     GPIO.output(pin, gpio_state)
 
+@app.route('/newtweet')
+def dsffsf():
+    print 'sdfsf'
+    s = 'hello ' + str( random.random() )
+    emit_new_tweet(s)
+    return '...'
+
+
+import random
+
+
+def emit_new_tweet(tweet):
+    for i in range(3):
+        import time
+        time.sleep(0.5)
+        print 'tweet ?', tweet
+        socketio.emit('new_tweet', str(i) , broadcast=True)
 
 if __name__ == '__main__':
     try:
         # app.run(debug=True)
-        app.run(host='0.0.0.0', port=8080, debug=True)
+        socketio.run(app, host='0.0.0.0', port=8080, debug=True)
     finally:
         GPIO.cleanup()
         print "Bye."

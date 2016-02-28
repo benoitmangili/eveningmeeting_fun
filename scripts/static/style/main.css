@@ -27,7 +27,7 @@ h1 {
   background: red;
 }
 body {
-  background: black;
+  /*background: black;*/
 }
 .button {
   cursor:pointer;
@@ -35,3 +35,34 @@ body {
 p {
   text-align: center;
 }
+
+svg {
+  height: 300px;
+  width: 400px;
+  background-color: black;
+}
+.legend {
+  fill:white;
+}
+.bar {
+  fill: white;
+}
+.axis {
+  stroke: white;
+  stroke-width: 2;
+}
+
+#messages {
+  /*color:white;*/
+}
+
+#messages ul {
+  border: 1px solid black;
+}
+
+#messages li {
+  border: 1px solid black;
+}
+
+
+

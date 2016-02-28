@@ -18,13 +18,18 @@
         <div class="TemperatureButton">
           <button type="button" class="btn btn-default btn-md">Get Temperature</button>
         </div>
+        <div>
+          <button id="switch" type="button" class="btn btn-default btn-md">or...</button>
+        </div>
       </div>
     </div>
-    <div class="container">
+    <div class="graphdiv">
         <h2>Insert graph here....<h2>
+        <div id='graph'> </div>
     </div>
 
-  <script scr="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script scr="text/javascript" src="{{ url_for('static', filename='js/jquery-2.2.1.min.js') }}"></script>
+  <script scr="text/javascript" src="{{ url_for('static', filename='js/d3.min.js') }}"></script>
   <script src="{{ url_for('static', filename='js/scripts_3.js') }}"></script>
 </body>
 </html>
