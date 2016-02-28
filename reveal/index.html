@@ -20,17 +20,6 @@
     <!-- Code syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
 
-
-
-    <!-- Printing and PDF exports -->
-    <script>
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    </script>
-
     <!--[if lt IE 9]>
     <script src="lib/js/html5shiv.js"></script>
     <![endif]-->
@@ -39,7 +28,6 @@
   </head>
 
   <body>
-
     <div class="reveal">
 
       <!-- Any section element inside of this container is displayed as a slide -->
@@ -53,6 +41,7 @@
                 Hack your thermostat, automate tedious tasks like watering your plants, let your pi read out the weather, let your house send tweets when the alarm goes off, the opportunities are endless. And it is not that hard to get started!
                 In fact, today we'll show you how easy it is!
               </aside>
+                <div>Network: evening_fun, Password: opihr</div>
             </section>
 
             <section>
@@ -68,9 +57,11 @@
                 water your plants using a pump and a humidity sensor, text yourself a picture of a guest who is ringing your doorbell, whatever you can think of that has these basic components of a sensor and an actuator. Of course you can also just display data without acting on it.
                 If we make it through the end quickly enough we also have an all out crazy nuclear demo for you, involving twitter, speakers and yourselves.
               </aside>
+                <div>Network: evening_fun, Password: opihr</div>
             </section>
             <section>
-                <img class="stretch" data-src="img/complex_gui.jpg">
+                <img class="stretch" data-src="img/jarvis.png">
+                <div>Network: evening_fun, Password: opihr</div>
             </section>
         </section>
         <!-- Part 1 -->
@@ -140,7 +131,8 @@ GPIO.cleanup()
                 <img class="stretch" data-src="img/GPIO_Layout.png">
                 <a href="https://pinout.xyz/">https://pinout.xyz/</a>
             </section>
-       </section>
+        </section>
+
        <!-- Part 2 -->
        <section>
             <section>
@@ -191,6 +183,12 @@ def turn_me_off():
               Tell people this only works within the wifi network (which is usually a good thing).
                   It is possible to open up a port to the outside world but then need to be careful about safety.
               </aside>
+            </section>
+            <section>
+                <h2>Let's have a go!</h2>
+                <h3>192.168.0.105:8080</h3>
+                <h3>192.168.0.105:8080/lamp/on</h3>
+                <h3>192.168.0.105:8080/lamp/off</h3>
             </section>
             <section>
                 <h2>Now using a proper web app!</h2>
@@ -260,7 +258,7 @@ $(".OnButton").click(function() {
     $.ajax({
             url: "/lamp",
             type: "put",
-            data: {"state":"High"}
+            data: JSON.stringify({"state":"High"})
         }).done(function (data) {
         // Set virtual LED state
         if (data.state === 'High'){
@@ -288,6 +286,10 @@ def lamp_stuff():
     return jsonify(state=state)
 </code></pre>
            </section>
+            <section>
+                <h2>Let's have a go!</h2>
+                <h3>192.168.0.105:8080</h3>
+            </section>
         </section>
         <!-- Part 3 -->
         <section>
@@ -357,6 +359,30 @@ def measure_temperature():
                </code></pre>
                 </span>
             </section>
+            <section>
+                <h4>HTML</h4>
+                <pre class="html"><code data-trim contenteditable>
+&ltdiv class='bigButton' id='temperatureBtn'&gt
+    &ltdiv id="current_temperature"&gtGet temperature&lt/div&gt
+&lt/div&gt
+            </code></pre>
+                <h4>JS</h4>
+                <pre class="hljs"><code data-trim contenteditable>
+$("#temperatureBtn").click(function() {
+      $.ajax({
+              url: "/temperature",
+              type: "get",
+      }).done(function (data) {
+        $( "#current_temperature" ).text( data.value.toFixed(2) + "°C" );
+        $( "#graphBtn" ).show();
+      });
+  });
+            </code></pre>
+            </section>
+            <section>
+                <h2>Let's have a go!</h2>
+                <h3>192.168.0.105:8080</h3>
+            </section>
          </section> 
        <!-- Part 4 -->               
        <section>
@@ -368,17 +394,27 @@ def measure_temperature():
          </aside>
            </section>
        <section>
-           <span class="fragment">
               <pre class="python"><code data-trim contenteditable>
 from Controller import Controller
 # Instantiate Controller Class
-t_lower = 15
-t_upper = 20
-controller = Controller(t_lower, t_upper)
+set_lower = 15
+set_upper = 20
+controller = Controller(sest_lower, set_upper)
                </code></pre>
-           </span>
+        </section>
+           <section>
+               <img class="stretch" data-src="img/controller_sketch.png">
            <span class="fragment">
+               </span>
+           </section>
+           <section>
            <pre class="python"><code data-trim contenteditable>
+from Controller import Controller
+# Instantiate Controller Class
+sest_lower = 15
+set_upper = 20
+controller = Controller(sest_lower, set_upper)
+
 def get_heater_command():
     # Returns true if the heater is to be turned on or false otherwise
     measurement = sensor.getMeasurement()
@@ -387,6 +423,11 @@ def get_heater_command():
                </code></pre>
                 </span>
        </section>
+       <section>
+        <h2>Let's have a go!</h2>
+        <img class="stretch" data-src="img/ice_bucket_challenge.jpg">
+
+      </section>
        </section>
        <!-- Part 5 -->
         <section>
