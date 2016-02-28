@@ -33,10 +33,17 @@ def hello_world():
 def get_last_tweet(num_tweets):
     # Limit the number of tweets that people can get.
     tweets = twitter.get_tweets('tweet_pi_tweet', num_tweets)
+    for tweet in tweets:
+
+
     tweet_text = [tweet.text for tweet in tweets]
     tweet_author = [tweet.author.screen_name for tweet in tweets]
 
-    return json.dumps([{"author": name, "tweet": text} for name,text in zip(tweet_author, tweet_text)])
+    # TODO: get time stamp of tweet
+    # TODO: Set vote based on tweet containing colder/hotter vote =[] if not a valid tweet.
+    return json.dumps([{"author": name, "tweet": text} for name, text in zip(tweet_author, tweet_text)])
+
+# TODO: function to return is there is a new tweet
 
 #TODO: This should not be an endpoint and and run all the time. Should be put in a loop. Put this in a separate thread.
 # Use the periodic timer
@@ -47,6 +54,8 @@ def twitter_vote():
     tweets = twitter.get_tweets('tweet_pi_tweet', 10)
     # check if need to handle case where there are less than 10
     tweet_text = [tweet.text for tweet in tweets]
+
+
 
     # Turn on heater via voting system
     # change to hotter/colder. 'make it hot, make it hotter'
