@@ -76,9 +76,8 @@
         <!-- Part 1 -->
         <section>
             <section>
-                <h2>Part 1: Controll a Lamp with the Pi</h2>
+                <h2>Part 1: Controlling a Lamp with the Pi</h2>
                 <img class="stretch" data-src="img/control_loop_A.png">
-
             </section>
             <section>
                   <img class="stretch"  data-src="img/raspberry_pi.jpeg">
@@ -90,17 +89,26 @@
               It comes with python.
               </aside>
             </section>
-            <section>
-                Insert frizzing diagram of setup here.
+            <section data-transition="fade-in none-out">
+                <img class="stretch" data-src="img/relay_sketch.png">
+             <aside class="notes">
+                  Explain that we need the transistor to control the relay because
+                 we don't want to draw too much current from the gpio otherwise we
+                 would damage it.
+              </aside>
+            </section>
+            <section data-transition="none-in none-out">
+                <img class="stretch" data-src="img/relay_sketch_highlighted.png">
+             <aside class="notes">
+                 All the circled end points are pins on the pi.
+              </aside>
             </section>
             <section>
-            <span class="fragment">
             <pre class="python"><code data-trim contenteditable>
 import RPi.GPIO as GPIO
 # Set the pi to board mode
 GPIO.setmode(GPIO.BOARD)
 </code></pre>
-            </span>
             <span class="fragment">
             <pre class="python"><code data-trim contenteditable>
 # Set up
@@ -129,19 +137,19 @@ GPIO.cleanup()
             </section>
             <section>
                 <h3>How do you know which pin is which?</h3>
-                <!--TODO: This image needs to be bigger-->
                 <img class="stretch" data-src="img/GPIO_Layout.png">
+                <a href="https://pinout.xyz/">https://pinout.xyz/</a>
             </section>
        </section>
        <!-- Part 2 -->
        <section>
             <section>
-              <h2>Part 2: Controlling a lamp via the web</h2>
+              <h2>Part 2: Controlling a lamp via a web app</h2>
                   <img class="stretch" data-src="img/control_loop_A.png">
               <aside class="notes">
                   For your reference: We are still in the part where we control the actuator but now
                   we want to do it via the web.
-              For people to type /on or /off to controll the lamp
+                  Tell people to type lamp/on or lamp/off to controll the lamp
               </aside>
             </section>
             <section>
@@ -180,7 +188,7 @@ def turn_me_off():
             </code></pre>
           </span>
               <aside class="notes">
-              Tell people this only works within the wifi network (which is usualy a good thing).
+              Tell people this only works within the wifi network (which is usually a good thing).
                   It is possible to open up a port to the outside world but then need to be careful about safety.
               </aside>
             </section>
@@ -247,14 +255,35 @@ app.run(host='0.0.0.0', port=8080, debug=True)
 sudo cat /sys/bus/w1/devices/&ltdevice_number&gt/w1_slave
             </code></pre>
           </span>
+          <span class="fragment">
+              <img data-src="img/read_temp_from_file.png">
+          </span>
               <aside class="notes">
-              show code snipped of file read. How do I know the device name: folder thtat starts with 28 and pops up
-                  in devices folder when you plug in the device. use pin 4 for w1
-
+              sHow do I know the device name: folder thtat starts with 28 and pops up
+                  in devices folder when you plug in the device.
+                  use pin 4 for w1 although this can be changed in the pi config.
               </aside>
             </section>
             <section>
               But we can wrap it in a python class.
+              <pre class="python"><code data-trim contenteditable>
+class Sensor:
+    def __init__(self):
+        self.temperature = 0
+        # Set up wire1 communicat
+        os.system('modprobe w1-gpio')
+        os.system('modprobe w1-therm')
+
+        base_dir = '/sys/bus/w1/devices/'
+        device_folder = glob.glob(base_dir + '28*')[0]
+        self.device_file = device_folder + '/w1_slave'
+
+    def __readSensor(self):
+        f = open(self.device_file, 'r')
+        rawData = f.readlines()
+        f.close()
+        return rawData
+            </code></pre>
              <aside class="notes">
               There are different protocols for talking to devices, w1, i2c, etc. the pi has a lot of these available.
               </aside>  
@@ -305,11 +334,11 @@ def measure_temperature():
         //parallaxBackgroundSize: '1024px 768px',
 
         // Factor of the display size that should remain empty around the content
-        margin: 0.1,
+        //margin: 0.1,
 
         // Bounds for smallest/largest possible scale to apply to content
-        minScale: 0.2,
-        maxScale: 1.5,
+        //minScale: 0.2,
+        //maxScale: 1.5,
         transition: 'slide', // none/fade/slide/convex/concave/zoom
 
         // Optional reveal.js plugins
