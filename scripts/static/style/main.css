@@ -26,29 +26,93 @@ h1 {
 .on {
   background: red;
 }
+
 body {
-  /*background: black;*/
 }
+
 .button {
   cursor:pointer;
 }
+
 p {
   text-align: center;
 }
 
-svg {
-  height: 300px;
-  width: 400px;
-  background-color: black;
+/* section 3 */
+
+@media screen and (min-width: 760px) {
+  .bigButton {
+    background-color: #ff00ff;
+    border-radius: 5px;
+    color: white;
+    font-size: 2em;
+    padding: 2em;
+    text-align: center;
+    margin-top:2em;
+  }
+
+  .miniButton {
+    background-color: #ff00ff;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    padding: 1em;
+    text-align: center;
+    margin-top:1em;
+  }
 }
+
+@media screen and (max-width: 760px) {
+  .part3 h1 {display: none;}
+  .bigButton {
+    background-color: #ff00ff;
+    border-radius: 5px;
+    color: white;
+    font-size: 2em;
+    padding: 2em;
+    text-align: center;
+    margin-top:2em;
+  }
+
+  .miniButton {
+    background-color: #ff00ff;
+    border-radius: 5px;
+    color: white;
+    font-size: 1em;
+    padding: 1em;
+    text-align: center;
+    margin-top:1em;
+  }
+
+
+}
+#graph {
+  text-align: center
+}
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+
+
 .legend {
-  fill:white;
+  fill:black;
 }
 .bar {
-  fill: white;
+  fill: blue;
 }
 .axis {
-  stroke: white;
+  stroke: black;
   stroke-width: 2;
 }
 

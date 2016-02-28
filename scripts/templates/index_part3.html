@@ -10,23 +10,36 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
 </head>
 <body>
-    <div class="container">
-      <div class="row">
-         <h1>The current temperature is... <span class="current_temperature"></span></h1>
+  <div class="container part3">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Temperature sensor</h1>
       </div>
-      <div class="row" style="text-align: center">
-        <div class="TemperatureButton">
-          <button type="button" class="btn btn-default btn-md">Get Temperature</button>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class='bigButton' id='temperatureBtn'>
+          <!-- <div></div> -->
+          <div id="current_temperature">Get temperature</div>
         </div>
-        <div>
-          <button id="switch" type="button" class="btn btn-default btn-md">or...</button>
+      </div>
+      <div class="col-md-12">
+        <div class='miniButton' id='graphBtn'>
+          <div>
+          what about a graph?
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-2 col-xs-12">
+      </div>
+      <div class="col-md-6 col-sm-8 col-xs-12">
+        <div id='graphdiv'>
+          <div id='graph'> </div>
         </div>
       </div>
     </div>
-    <div class="graphdiv">
-        <h2>Insert graph here....<h2>
-        <div id='graph'> </div>
-    </div>
+  </div>
+
 
   <script scr="text/javascript" src="{{ url_for('static', filename='js/jquery-2.2.1.min.js') }}"></script>
   <script scr="text/javascript" src="{{ url_for('static', filename='js/d3.min.js') }}"></script>

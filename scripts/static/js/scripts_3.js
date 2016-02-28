@@ -1,19 +1,21 @@
 var main = function() {
   // insert code here
-  $(".TemperatureButton").click(function() {
+  $("#temperatureBtn").click(function() {
       $.ajax({
               url: "/temperature",
               type: "get",
       }).done(function (data) {
-        $( ".current_temperature" ).text( data.value + "degC" );
+        $( "#current_temperature" ).text( data.value.toFixed(2) + "°C" );
+        $( "#graphBtn" ).show();
       });
   });
 
-  $("#switch").click(function() {
 
-    $('.graphdiv').show();
+
+  $("#graphBtn").click(function() {
+
+    $('#graphdiv').show();
     setInterval(function() {
-
       $.ajax({
               url: "/temperature",
               type: "get",
@@ -21,21 +23,28 @@ var main = function() {
         if (temps.push(data) > 10 ) temps.shift()
         plot(temps)
       });
-
-
-
     }, 1000);
+    $("#graphBtn" ).hide();
+    $("#graphBtn").off('click')
   });
-
-
-
-
-
 };
 
-$('.graphdiv').hide();
+$("#graphBtn" ).hide();
+$('#graphdiv').hide();
 
-var svg = d3.select('#graph').append('svg');
+
+
+
+
+var svg = d3.select('#graph')
+  .append('div')
+  .attr('class', 'svg-container')
+  .append('svg')
+  .attr("preserveAspectRatio", "xMinYMin meet")   
+  .attr("viewBox", "0 0 400 400")
+   //class to make it responsive
+  .attr('class', "svg-content-responsive", true);
+
 var temps = [];
 
 svg.append('line')
