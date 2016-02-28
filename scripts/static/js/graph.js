@@ -52,11 +52,11 @@ var line = d3.svg.line()
 
 var min_line = svg.append('path')
                   .attr('d', "M "+xScale(0)+" " + yScale(17) + " L"+xScale(10)+" " +yScale(17)+ " Z")
-                  .attr('class', 'min_line');
+                  .attr('class', 'min_line hidden');
 
 var max_line = svg.append('path')
                   .attr('d', "M "+xScale(0)+" " + yScale(23) + " L"+xScale(10)+" " +yScale(23)+ " Z")
-                  .attr('class', 'max_line');
+                  .attr('class', 'max_line hidden');
 
 
 
@@ -80,11 +80,16 @@ var path = svg.append('g')
 var update_limits = function(data){
   min_line.attr('d', "M "+xScale(0)+" " + yScale(data.min_temp) + " L"+xScale(10)+" " +yScale(data.min_temp)+ " Z");
   max_line.attr('d', "M "+xScale(0)+" " + yScale(data.max_temp) + " L"+xScale(10)+" " +yScale(data.max_temp)+ " Z");
+  min_line.classed('hidden', false);
+  max_line.classed('hidden', false);
 }
 
 var plot = function( data, tempo ){
   console.log('tick', data)
-
+  if (data.with_limits){
+    min_line.classed('hidden', false);
+    max_line.classed('hidden', false);
+  }
   d3_data.push(data.datum);
 
   path
