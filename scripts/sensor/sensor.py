@@ -12,7 +12,6 @@ class DS18B20:
     sensorUnits = "degC"
 
     def __init__(self):
-
         self.temperature = 0
         # Set up wire1 communicat
         os.system('modprobe w1-gpio')

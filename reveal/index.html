@@ -199,7 +199,7 @@ def turn_me_off():
                 </aside>
             </section>
             <section>
-
+                <h3>Server Side: </h3>
             <pre class="python"><code data-trim contenteditable>
 from flask import Flask, request, jsonify, render_template
 </code></pre>
@@ -208,7 +208,7 @@ from flask import Flask, request, jsonify, render_template
             <pre class="python"><code data-trim contenteditable>
 @app.route('/')
 def hello_world():
-    return render_template('index_part2b.html')
+    return render_template('index.html')
 </code></pre>
             </span>
             <span class="fragment">
@@ -238,6 +238,56 @@ app.run(host='0.0.0.0', port=8080, debug=True)
             (-> server returns changed state info -> javascript changes css to change red circle colour)
            </aside>
             </section>
+           <section>
+               <h3>Client side:</h3>
+            <span class="fragment">
+                <h4>html</h4>
+            <pre class="html"><code data-trim contenteditable>
+&ltdiv class="OnButton"&gt
+    &ltbutton type="button" class="btn btn-default btn-lg"&gtOn&ltbutton&gt
+&lt/div&gt
+&ltdiv class="OffButton"&gt
+    &ltbutton type="button" class="btn btn-default btn-lg"&gtOff&ltbutton&gt
+&lt/div&gt
+&ltdiv class="circle"&gt&lt/div&gt
+&lt/div&gt
+            </code></pre>
+            </span>
+            <span class="fragment">
+                <h4>js</h4>
+               <pre class="hljs"><code data-trim contenteditable>
+$(".OnButton").click(function() {
+    $.ajax({
+            url: "/lamp",
+            type: "put",
+            data: {"state":"High"}
+        }).done(function (data) {
+        // Set virtual LED state
+        if (data.state === 'High'){
+        $(".circle").removeClass("off").addClass("on");}
+    });
+});
+               </code></pre>
+            </span>
+           </section>
+           <section>
+               <h3>Server side reminder:</h3>
+            <pre class="python"><code data-trim contenteditable>
+@app.route('/lamp', methods=['GET', 'PUT'])
+def lamp_stuff():
+    if request.method == 'PUT':
+        # Change state
+        data = request.form
+        state = data['state']
+
+        set_gpio_state(state)
+
+    # confirm the state has been set
+    state = get_gpio_state(pin)
+
+    return jsonify(state=state)
+</code></pre>
+           </section>
         </section>
         <!-- Part 3 -->
         <section>
