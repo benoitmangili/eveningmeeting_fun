@@ -296,7 +296,11 @@ def lamp_stuff():
                 <img class="stretch" data-src="img/control_loop_S.png">
             </section>
             <section>
-                Insert frizzing diagram of setup here.
+                <img class="stretch" data-src="img/sensor_sketch.png">
+             <aside class="notes">
+              There are different protocols for talking to devices, w1, i2c, etc.
+                 the pi has a lot of these available. We are using w1.
+              </aside>
             </section>
             <section>
               It's just reading a file!
@@ -309,7 +313,7 @@ sudo cat /sys/bus/w1/devices/&ltdevice_number&gt/w1_slave
               <img data-src="img/read_temp_from_file.png">
           </span>
               <aside class="notes">
-              sHow do I know the device name: folder thtat starts with 28 and pops up
+              How do I know the device name: folder that starts with '28' and pops up
                   in devices folder when you plug in the device.
                   use pin 4 for w1 although this can be changed in the pi config.
               </aside>
@@ -334,27 +338,55 @@ class Sensor:
         f.close()
         return rawData
             </code></pre>
-             <aside class="notes">
-              There are different protocols for talking to devices, w1, i2c, etc. the pi has a lot of these available.
-              </aside>  
             </section>
             <section>
               Now let's look at the temperature in the web app. We are almost there!
+                <span class="fragment">
+                <pre class="python"><code data-trim contenteditable>
+from sensor.sensor import DS18B20 as sensor
+# Instantiate Sensor Class
+sensor = sensor()
+               </code></pre>
+                </span>
+                <span class="fragment">
                 <pre class="python"><code data-trim contenteditable>
 @app.route('/temperature')
 def measure_temperature():
     measurement = sensor.getMeasurement()
     return jsonify(value=measurement.value, time=measurement.timeStamp)
                </code></pre>
+                </span>
             </section>
          </section> 
        <!-- Part 4 -->               
        <section>
+           <section>
         <h2>Part 4: Bringing it all together - a proper control loop!</h2>
            <img class="stretch" data-src="img/control_loop_C.png">
         <aside class="notes">
               Set set point and dip sensor in ice water and warm it up by hand.
          </aside>
+           </section>
+       <section>
+           <span class="fragment">
+              <pre class="python"><code data-trim contenteditable>
+from Controller import Controller
+# Instantiate Controller Class
+t_lower = 15
+t_upper = 20
+controller = Controller(t_lower, t_upper)
+               </code></pre>
+           </span>
+           <span class="fragment">
+           <pre class="python"><code data-trim contenteditable>
+def get_heater_command():
+    # Returns true if the heater is to be turned on or false otherwise
+    measurement = sensor.getMeasurement()
+    command = controller.get_command(measurement.value)
+    return command
+               </code></pre>
+                </span>
+       </section>
        </section>
        <!-- Part 5 -->
         <section>
