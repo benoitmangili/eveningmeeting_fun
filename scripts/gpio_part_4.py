@@ -35,7 +35,7 @@ app = Flask(__name__)
 # Load index page
 @app.route('/')
 def index():
-    return render_template('index_part3.html')
+    return render_template('index_part4.html')
 
 
 @app.route('/temperature')
@@ -47,14 +47,19 @@ def measure_temperature():
 @app.route('/set_point', methods=['GET', 'PUT'])
 def set_set_point():
     if request.method == 'PUT':
-        data = request.form
+        data = json.loads(request.data)
+        print data
         set_point_upper = data['set_point_upper']
         set_point_lower = data['set_point_lower']
-        controller.update_temperature_range(set_point_lower, set_point_upper)
+        if set_point_lower < set_point_upper:
+            print 'OK'
+            controller.update_temperature_range(set_point_lower, set_point_upper)
+        else:
+            return 'temperature range is crazy', 500
     else:
         set_point_upper = controller.set_point_upper
         set_point_lower = controller.set_point_lower
-        return jsonify(set_point_upper=set_point_upper,set_point_lower=set_point_lower)
+    return jsonify(set_point_upper=set_point_upper,set_point_lower=set_point_lower), 200
 
 
 @app.route('/lamp', methods=['GET', 'PUT'])
@@ -75,22 +80,17 @@ def lamp_stuff():
 @app.route('/temperature_thread', methods=['GET', 'PUT'])
 def control_temperature_thread():
     global process
-    if request.method == 'PUT':
-        # Might need to change the location of the data in the request
-        data = request.form
-        command = data['thread_command']
-        if command == 'Start' and not process:
-            time_update = 1
-            process = PeriodicTimer(time_update, control_gpio_state)
-            process.start()
-        else:
-            try:
-                process.cancel()
-            except:
-                print "Process did not exist yet"
+    command = json.loads(request.data)['thread_command']
+    if command == 'Start' and not process:
+        time_update=1
+        process = PeriodicTimer(time_update, control_gpio_state)
+        process.start()
     else:
-        pass
-
+        try:
+            process.cancel()
+        except:
+            print "Process did not exist yet"
+    return "OK", 200
 
 def set_gpio_state(state):
     if state == 'High':

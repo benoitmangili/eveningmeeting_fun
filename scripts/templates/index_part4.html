@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" href="{{ url_for('static', filename='style/bootstrap/css/bootstrap.css') }}">
+
+ <!-- make it mobile friendly: -->
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <!-- my own css: -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style/main.css') }}">
+</head>
+<body>
+  <div class="container part4">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Temperature sensor</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class='bigButton' id='start_controller'>
+          <!-- <div></div> -->
+          <div>Start Controller</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-11 col-md-9 col-sm-10 col-xs-12">
+        <div id='graphdiv'>
+          <div id='graph'> hello </div>
+        </div>
+      </div>
+      <div class="col-lg-1 col-md-3 col-sm-2 col-xs-12">
+        <div class="row">
+          <div class="col-xs-6"> min </div>
+          <div class="col-xs-6"> max </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6" id='min_up'> up </div>
+          <div class="col-xs-6" id='max_up'> up </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6" id='min_value'> 23 </div>
+          <div class="col-xs-6" id='max_value'> 45 </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6" id='min_down'> down </div>
+          <div class="col-xs-6" id='max_down'> down </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--         
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class='bigButton' id='temperatureBtn'>
+          <div id="current_temperature">Get temperature</div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class='miniButton' id='graphBtn'>
+          <div>
+          what about a graph?
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-2 col-xs-12">
+      </div>
+      <div class="col-md-6 col-sm-8 col-xs-12">
+        <div id='graphdiv'>
+          <div id='graph'> </div>
+        </div> -->
+
+
+  <script scr="text/javascript" src="{{ url_for('static', filename='js/jquery-2.2.1.min.js') }}"></script>
+  <script scr="text/javascript" src="{{ url_for('static', filename='js/d3.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/scripts_4.js') }}"></script>
+</body>
+</html>
