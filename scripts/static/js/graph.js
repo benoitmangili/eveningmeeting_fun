@@ -12,7 +12,7 @@ var svg = d3.select('#graph')
   .attr('class', 'svg-container')
   .append('svg:svg')
   .attr("preserveAspectRatio", "xMinYMin meet")   
-  .attr("viewBox", "0 0 800 800")
+  .attr("viewBox", "0 0 800 400")
    //class to make it responsive
   .attr('class', "svg-content-responsive", true)
   // .attr("width", width + margin.left + margin.right)
@@ -37,7 +37,7 @@ svg.append("defs").append("clipPath")
     .attr("width", width)
     .attr("height", height);
 
-var xAxis = d3.svg.axis().orient('bottom').scale(xScale);
+var xAxis = d3.svg.axis().tickFormat('').orient('bottom').scale(xScale);
 var yAxis = d3.svg.axis().orient('left').scale(yScale);
 
 var line = d3.svg.line()
@@ -47,7 +47,7 @@ var line = d3.svg.line()
   })
   .y(function(d,i){
     // console.log(" ? ",d)
-    return yScale(18 + d.value + Math.random());
+    return yScale(d.value);
   })
 
 var min_line = svg.append('path')
@@ -96,7 +96,7 @@ var plot = function( data, tempo ){
       .attr('d', line)
       .attr("transform", null)
       .transition()
-      .duration(tempo/2)
+      .duration(400)
       .ease("linear")
       .attr("transform", "translate(" + xScale(-1) + ",0)")
 

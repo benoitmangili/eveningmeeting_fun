@@ -40,67 +40,75 @@ p {
 
 /* section 3 */
 
-@media screen and (min-width: 760px) {
+@media screen and (min-width: 544px) {
   .bigButton {
-    background-color: #ff00ff;
-    border-radius: 5px;
-    color: white;
-    font-size: 2em;
-    padding: 2em;
-    text-align: center;
-    margin-top:2em;
+    font-size: 1.8em;
   }
 
-  .miniButton {
-    background-color: #ff00ff;
-    border-radius: 5px;
-    color: white;
-    font-size: 1em;
-    padding: 1em;
-    text-align: center;
-    margin-top:1em;
+  .mediumButton {
+    font-size: 1.8em;
+  }
+
+  .mediumTitle {
+    font-size: 1.8em;
+  }
+
+  .mediumValue {
+    font-size: 1.8em;
   }
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 544px) {
   .part3 h1 {display: none;}
+  .part4 h1 {display: none;}
   .bigButton {
-    background-color: #ff00ff;
-    border-radius: 5px;
-    color: white;
-    font-size: 2em;
-    padding: 2em;
-    text-align: center;
-    margin-top:2em;
-  }
-
-  .miniButton {
-    background-color: #ff00ff;
-    border-radius: 5px;
-    color: white;
     font-size: 1em;
-    padding: 1em;
-    text-align: center;
-    margin-top:1em;
   }
 
+  .mediumButton {
+    font-size: 1em;
+  }
 
+  .mediumTitle {
+    font-size: 1em;
+  }
+
+  .mediumValue {
+    font-size: 1em;
+  }
+
+}
+
+.bigButton {
+  background-color: #ff00ff;
+  border-radius: 5px;
+  color: white;
+  padding: 2em;
+  text-align: center;
+  margin-top:2em;
+}
+
+.part3 .bigButton {
 }
 
 .mediumButton {
   background-color: #ff00ff;
-    border-radius: 5px;
-    color: white;
-    font-size: 1em;
-    padding: 1em 0;
-    text-align: center;
-    margin: 0.5em;
+  border-radius: 5px;
+  color: white;
+  padding: 1em 0;
+  text-align: center;
+  margin: 0.5em 0;
+  width: 100%;
 }
 
 .mediumTitle {
   text-align: center; 
-  font-size: 1.1em;
 }
+
+.mediumValue {
+  text-align: center; 
+}
+
 
 #graph {
   text-align: center
@@ -109,7 +117,7 @@ p {
     display: inline-block;
     position: relative;
     width: 100%;
-    padding-bottom: 100%; /* aspect ratio */
+    padding-bottom: 60%; /* aspect ratio */
     vertical-align: top;
     overflow: hidden;
 }
@@ -120,8 +128,13 @@ p {
     left: 0;
 }
 
+.bulb {
+  text-align: center;
+  margin: auto;
+}
 .bulb svg{
-  width: 200px;
+  width: 150px;
+  height: 150px;
 }
 
 .legend {
