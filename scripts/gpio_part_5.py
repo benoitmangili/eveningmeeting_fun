@@ -22,7 +22,7 @@ except:
     GPIO = MockGPIO()
 
 # Instantiate Twitter class
-twitter = Twitter()
+twitter = None #Twitter()
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -117,7 +117,7 @@ def check_tweet_vote(tweet_text):
 if __name__ == '__main__':
     try:
         # app.run(debug=True)
-        socketio.run(app, host='0.0.0.0', port=8080, debug=True)
+        socketio.run(app, host='0.0.0.0', port=80, debug=True)
     finally:
         GPIO.cleanup()
         print "Bye."
