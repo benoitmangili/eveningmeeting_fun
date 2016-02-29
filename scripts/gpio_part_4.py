@@ -41,7 +41,7 @@ def index():
 @app.route('/temperature')
 def measure_temperature():
     measurement = sensor.getMeasurement()
-    return jsonify(value=measurement.value, time=measurement.timeStamp)
+    return jsonify(value=measurement.value, time=measurement.timeStamp), 200
 
 
 @app.route('/set_point', methods=['GET', 'PUT'])
@@ -72,7 +72,7 @@ def lamp_stuff():
     # confirm the state has been set
     state = get_gpio_state(pin)
 
-    return jsonify(state=state)
+    return jsonify(state=state), 200
 
 
 @app.route('/temperature_thread', methods=['GET', 'PUT'])
@@ -131,7 +131,7 @@ def control_gpio_state():
 if __name__ == '__main__':
     try:
         # app.run(debug=True)
-        app.run(host='0.0.0.0', port=80, debug=True)
+        app.run(host='0.0.0.0', port=8080, debug=True)
 
     finally:
         GPIO.cleanup()
