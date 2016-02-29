@@ -7,7 +7,7 @@ var update_bulb = function (state) {
         $('.bulb svg #star').show();
         $('.bulb svg #grad_on').show();
     }
-}
+};
 
 var blub_setter = function(state) {
     return function() {
@@ -24,7 +24,7 @@ var blub_setter = function(state) {
             update_bulb(data.state);
         });
     }
-}
+};
 
 var main = function() {
     $(".OnButton").click(blub_setter('High'));
