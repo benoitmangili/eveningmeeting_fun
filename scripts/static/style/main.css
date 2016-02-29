@@ -97,6 +97,10 @@ p {
     margin: 0.5em;
 }
 
+.mediumTitle {
+  text-align: center; 
+  font-size: 1.1em;
+}
 
 #graph {
   text-align: center
@@ -116,6 +120,9 @@ p {
     left: 0;
 }
 
+.bulb svg{
+  width: 200px;
+}
 
 .legend {
   fill:black;

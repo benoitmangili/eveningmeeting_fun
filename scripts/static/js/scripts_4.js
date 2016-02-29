@@ -11,7 +11,9 @@ var main = function() {
   $('#max_up')  .click( update_set_point_max_up   );
   $('#max_down').click( update_set_point_max_down );
 };
-
+$('.graphrow').hide();
+$('.bulb svg #star').hide();
+$('.bulb svg #grad_on').hide();
 
 
 var start_controller = function() {
@@ -37,8 +39,12 @@ var start_controller = function() {
   .then( update_set_point_display )
   // show everything
   .then(function(data){
-    $('#start_controller').hide();
+    $('#start_controller').off('click').hide();
     controllerIsRunning = true;
+    $('.graphrow').show();
+    
+
+
   })
   // if something wrong happend
   .fail(function(data){
@@ -85,6 +91,24 @@ var start_plot_loop = function() {
         plot({datum: data, with_limits:true}, tempo)
       });
     }, tempo);
+
+    graphInterval = setInterval(function() {
+      $.ajax({
+              url: "/lamp",
+              type: "get",
+      }).done(function (data) {
+        console.log("lamp : ", data);
+        if (data.state === 'Low') {
+          $('.bulb svg #star').hide();
+          $('.bulb svg #grad_on').hide();
+        } else {
+          $('.bulb svg #star').show();
+          $('.bulb svg #grad_on').show();
+        }
+      });
+    }, tempo);
+
+
   }
 }
 

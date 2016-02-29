@@ -42,11 +42,11 @@ var yAxis = d3.svg.axis().orient('left').scale(yScale);
 
 var line = d3.svg.line()
   .x(function(d,i){ 
-    console.log(xScale(i))
+    // console.log(xScale(i))
     return xScale(i);
   })
   .y(function(d,i){
-    console.log(" ? ",d)
+    // console.log(" ? ",d)
     return yScale(18 + d.value + Math.random());
   })
 
@@ -85,7 +85,7 @@ var update_limits = function(data){
 }
 
 var plot = function( data, tempo ){
-  console.log('tick', data)
+  // console.log('tick', data)
   if (data.with_limits){
     min_line.classed('hidden', false);
     max_line.classed('hidden', false);
