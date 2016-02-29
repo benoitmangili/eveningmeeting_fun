@@ -1,7 +1,20 @@
-from flask import Flask, request, jsonify, render_template, url_for, redirect
+import gevent
 
+from gevent import monkey
+monkey.patch_all()
+
+
+
+from flask import Flask, request, jsonify, render_template, url_for, redirect
+from threading import Thread
+
+from flask import copy_current_request_context
+from flask_socketio import SocketIO, send
 from twitter.Twitter import Twitter
+from PeriodicTimer import PeriodicTimer
 import json
+
+
 try:
    import RPi.GPIO as GPIO
 except:
@@ -9,7 +22,7 @@ except:
     GPIO = MockGPIO()
 
 # Instantiate Twitter class
-twitter = Twitter()
+twitter = None #Twitter()
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -17,10 +30,9 @@ pin = 36
 GPIO.setup(pin, GPIO.OUT)
 
 app = Flask(__name__)
-from flask_socketio import SocketIO, send
 
 app.config['SECRET_KEY'] = 'evening_fun'
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode='gevent')
 
 
 # Return hello world to the index page
@@ -31,6 +43,7 @@ def hello_world():
 # Can be used for the life update stream of tweets
 @app.route('/get_tweets/<int:num_tweets>')
 def get_last_tweet(num_tweets):
+    print "?"
     # Limit the number of tweets that people can get.
     tweets = twitter.get_tweets('tweet_pi_tweet', num_tweets)
     tweet_list = []
@@ -70,23 +83,27 @@ def twitter_vote():
 
     GPIO.output(pin, gpio_state)
 
+process = None
 @app.route('/newtweet')
 def dsffsf():
-    print 'sdfsf'
-    s = 'hello ' + str( random.random() )
-    emit_new_tweet(s)
-    return '...'
+    global process    
+    if not process:
+        process = Thread(target = background_thread)
+        process.deamon = True
+        process.start()
 
+    return "OK", 200
 
+import time
 import random
-
+def background_thread():
+    while True:
+        time.sleep(1)
+        socketio.emit('new_tweet', {'author':'hello', 'vote': random.random()})
 
 def emit_new_tweet(tweet):
-    for i in range(3):
-        import time
-        time.sleep(0.5)
-        print 'tweet ?', tweet
-        socketio.emit('new_tweet', str(i) , broadcast=True)
+    print 'tweet ?', tweet
+    socketio.emit('new_tweet', str(tweet) , broadcast=True)
 
 
 def check_tweet_vote(tweet_text):
@@ -100,7 +117,7 @@ def check_tweet_vote(tweet_text):
 if __name__ == '__main__':
     try:
         # app.run(debug=True)
-        socketio.run(app, host='0.0.0.0', port=8080, debug=True)
+        socketio.run(app, host='0.0.0.0', port=80, debug=True)
     finally:
         GPIO.cleanup()
         print "Bye."
