@@ -80,7 +80,7 @@ var update_set_point_min_down = function(){ update_set_point(min_temp-0.5, max_t
 var update_set_point_max_up   = function(){ update_set_point(min_temp  , max_temp+0.5); }
 var update_set_point_max_down = function(){ update_set_point(min_temp  , max_temp-0.5); }
 
-var tempo = 500;
+var tempo = 2000;
 var start_plot_loop = function() {
   if (!controllerIsRunning){
     graphInterval = setInterval(function() {

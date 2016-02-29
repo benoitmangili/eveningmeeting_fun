@@ -79,6 +79,8 @@ def lamp_stuff():
 def control_temperature_thread():
     global process
     command = json.loads(request.data)['thread_command']
+    if command == 'Start' and process :
+        print 'process is on!'
     if command == 'Start' and not process:
         time_update=1
         process = PeriodicTimer(time_update, control_gpio_state)
@@ -86,6 +88,7 @@ def control_temperature_thread():
     else:
         try:
             process.cancel()
+            process = None
         except:
             print "Process did not exist yet"
     return "OK", 200
@@ -126,6 +129,7 @@ def control_gpio_state():
     command = get_heater_command()
     GPIO.output(pin, command)
     state = get_gpio_state(pin)
+    print state
     return state
 
 if __name__ == '__main__':
