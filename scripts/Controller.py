@@ -2,8 +2,7 @@
 class Controller:
     """ Controller """
     def __init__(self, set_point_lower, set_point_upper):
-        self.set_point_lower = set_point_lower
-        self.set_point_upper = set_point_upper
+        self.update_temperature_range(set_point_lower, set_point_upper)
         self._state_prev = False
 
     def get_command(self, var_current):
