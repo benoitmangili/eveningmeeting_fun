@@ -2,9 +2,9 @@ from flask import Flask, request, jsonify, render_template, url_for, redirect
 from time import sleep
 import json
 # Can only use DS18B20 on the raspberry pi
-#from sensor.sensor import DS18B20 as sensor
+from sensor.sensor import DS18B20 as sensor
 # TODO: comment the real sensor in!!!
-from sensor.DummySensor import DummySensor as sensor
+#from sensor.DummySensor import DummySensor as sensor
 from Controller import Controller
 from PeriodicTimer import PeriodicTimer
 
