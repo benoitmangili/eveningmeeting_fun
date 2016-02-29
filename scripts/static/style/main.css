@@ -28,6 +28,7 @@ h1 {
 }
 
 body {
+  background-color: #E9E9E9;
 }
 
 .button {
@@ -80,7 +81,7 @@ p {
 }
 
 .bigButton {
-  background-color: #ff00ff;
+  background-color: #FF9900;
   border-radius: 5px;
   color: white;
   padding: 2em;
@@ -88,11 +89,8 @@ p {
   margin-top:2em;
 }
 
-.part3 .bigButton {
-}
-
 .mediumButton {
-  background-color: #ff00ff;
+  background-color: #FF9900;
   border-radius: 5px;
   color: white;
   padding: 1em 0;
@@ -147,9 +145,14 @@ p {
 .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
+  stroke: #424242;
   stroke-width: 3px;
   shape-rendering: crispEdges;
+}
+
+.axis text {
+  font-size: 1.8em;
+  fill: #424242;
 }
 
 .min_line {
@@ -176,7 +179,7 @@ p {
 
 .line {
   fill: none;
-  stroke: blue;
+  stroke: #3299BB;
   stroke-width: 3px;
 }
 

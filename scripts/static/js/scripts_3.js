@@ -15,8 +15,8 @@ var main = function() {
   $("#graphBtn").click(function() {
 
     $('#graphdiv').show();
-    $("#graphBtn" ).hide();
-    $("#graphBtn").off('click')
+    $("#graphBtn" ).hide().off('click')
+    $("#temperatureBtn").off('click')
     start_plot_loop();
   });
 };
@@ -27,7 +27,9 @@ var start_plot_loop = function() {
               url: "/temperature",
               type: "get",
       }).done(function (data) {
-        plot({datum: data}, tempo)
+        plot({datum: data}, tempo);
+        $( "#current_temperature" ).text( data.value.toFixed(2) + "°C" );
+
       });
     }, tempo);
 }

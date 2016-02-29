@@ -48,11 +48,9 @@ def measure_temperature():
 def set_set_point():
     if request.method == 'PUT':
         data = json.loads(request.data)
-        print data
         set_point_upper = data['set_point_upper']
         set_point_lower = data['set_point_lower']
         if set_point_lower < set_point_upper and set_point_upper <=25 and set_point_lower >= 15:
-            print 'OK'
             controller.update_temperature_range(set_point_lower, set_point_upper)
         else:
             return 'temperature range is crazy', 500

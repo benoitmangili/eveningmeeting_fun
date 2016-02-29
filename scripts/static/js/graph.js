@@ -38,7 +38,7 @@ svg.append("defs").append("clipPath")
     .attr("height", height);
 
 var xAxis = d3.svg.axis().tickFormat('').orient('bottom').scale(xScale);
-var yAxis = d3.svg.axis().orient('left').scale(yScale);
+var yAxis = d3.svg.axis().orient('left').scale(yScale).ticks(5);
 
 var line = d3.svg.line()
   .x(function(d,i){ 

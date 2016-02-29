@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 from time import sleep
+import json
 try:
    import RPi.GPIO as GPIO
 except:
@@ -25,7 +26,7 @@ def hello_world():
 def lamp_stuff():
     if request.method == 'PUT':
         # Change state
-        data = request.form
+        data = json.loads(request.data)
         state = data['state']
 
         set_gpio_state(state)
