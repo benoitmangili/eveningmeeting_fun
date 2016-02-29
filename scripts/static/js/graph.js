@@ -20,7 +20,8 @@ var svg = d3.select('#graph')
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var minTemp = 15;
+var minTemp = 10;
+var maxTemp = 30;
 // var minDate = new Date( 1000 * d3.min(data, function(el){return el.date}) );
 // var maxDate = new Date( 1000 * d3.max(data, function(el){return el.date}) );
 var xScale = d3.scale.linear()
@@ -28,7 +29,7 @@ var xScale = d3.scale.linear()
           .range([0, width]);
 
 var yScale = d3.scale.linear()
-          .domain([minTemp, 25])
+          .domain([minTemp, maxTemp])
           .range([height, 0]);
 
 svg.append("defs").append("clipPath")
