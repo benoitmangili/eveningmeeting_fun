@@ -254,22 +254,21 @@ app.run(host='0.0.0.0', port=8080, debug=True)
 &ltdiv class="OffButton"&gt
     &ltbutton type="button" class="btn btn-default btn-lg"&gtOff&ltbutton&gt
 &lt/div&gt
-&ltdiv class="circle"&gt&lt/div&gt
-&lt/div&gt
+&ltdiv class="lamp"&gt&lt/div&gt
             </code></pre>
             </span>
             <span class="fragment">
                 <h4>js</h4>
                <pre class="hljs"><code data-trim contenteditable>
 $(".OnButton").click(function() {
-    $.ajax({
-            url: "/lamp",
-            type: "put",
-            data: JSON.stringify({"state":"High"})
-        }).done(function (data) {
+    $.ajax({ url: "/lamp",
+             type: "put",
+             data: JSON.stringify({"state":"High"})
+    }).then(function (data) {
         // Set virtual LED state
         if (data.state === 'High'){
-        $(".circle").removeClass("off").addClass("on");}
+            $(".lamp").removeClass("off").addClass("on");
+        }
     });
 });
                </code></pre>
@@ -382,14 +381,13 @@ def measure_temperature():
                 <h4>JS</h4>
                 <pre class="hljs"><code data-trim contenteditable>
 $("#temperatureBtn").click(function() {
-      $.ajax({
-              url: "/temperature",
-              type: "get",
-      }).done(function (data) {
-        $( "#current_temperature" ).text( data.value.toFixed(2) + "°C" );
-        $( "#graphBtn" ).show();
-      });
-  });
+    $.ajax({ url: "/temperature",
+             type: "get",
+    }).then(function (data) {
+          $( "#current_temperature" ).text( data.value.toFixed(2) + "°C" );
+          $( "#graphBtn" ).show();
+    });
+});
             </code></pre>
             </section>
             <section>
