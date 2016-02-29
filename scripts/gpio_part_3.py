@@ -1,13 +1,17 @@
 from flask import Flask, jsonify, render_template
-# Can only use DS18B20 on the raspberry pi
+
+# You can only use DS18B20 on the raspberry pi, so for testing
+# on your dev machine use the dummy sensor.
 from sensor.sensor import DS18B20 as sensor
 # from sensor.DummySensor import DummySensor as sensor
 
 try:
    import RPi.GPIO as GPIO
 except:
+    # MockGPIO can be used for testing purposes when not working directly on the Pi
     from MockGPIO import MockGPIO
     GPIO = MockGPIO()
+    print "Using Mock GPIO"
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -35,8 +39,9 @@ def measure_temperature():
 
 if __name__ == '__main__':
     try:
-        # app.run(debug=True)
-        app.run(host='0.0.0.0', port=80, debug=True)
+        # app.run() # Use to run locally only on your machine
+        app.run(host='0.0.0.0', port=80) # This is visible on all computers on the network.
+        # Use the IP address of machine that is running the script to contact the server.
     finally:
         GPIO.cleanup()
         print "Bye."

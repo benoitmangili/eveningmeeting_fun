@@ -2,8 +2,10 @@ from flask import Flask, send_from_directory
 try:
    import RPi.GPIO as GPIO
 except:
+    # MockGPIO can be used for testing purposes when not working directly on the Pi
     from MockGPIO import MockGPIO
     GPIO = MockGPIO()
+    print "Using Mock GPIO"
 
 GPIO.setmode(GPIO.BOARD)
 
@@ -41,8 +43,9 @@ def serve_static_file(filename):
 
 if __name__ == '__main__':
     try:
-        # app.run(debug=True)
-        app.run(host='0.0.0.0', port=80, debug=True)
+        # app.run() # Use to run locally only on your machine
+        app.run(host='0.0.0.0', port=80) # This is visible on all computers on the network.
+        # Use the IP address of machine that is running the script to contact the server.
     finally:
         GPIO.cleanup()
         print "Bye."

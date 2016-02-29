@@ -42,3 +42,10 @@ class TestController:
         c.update_temperature_range(16,17)
         assert c.set_point_lower == 16
         assert c.set_point_upper == 17
+
+    def test_swapped_temperature_range(self):
+        t_lower = 15
+        t_upper = 18
+        c = Controller(t_upper, t_lower)
+        assert c.set_point_lower == 15
+        assert c.set_point_upper == 18

@@ -77,12 +77,14 @@ def lamp_stuff():
 
 @app.route('/temperature_thread', methods=['GET', 'PUT'])
 def control_temperature_thread():
+
     global process
     command = json.loads(request.data)['thread_command']
     if command == 'Start' and process :
-        print 'process is on!'
+        print 'process is already on!'
     if command == 'Start' and not process:
         time_update=1
+        # This starts the process that runs control_gpio_state periodically.
         process = PeriodicTimer(time_update, control_gpio_state)
         process.start()
     else:
@@ -92,6 +94,7 @@ def control_temperature_thread():
         except:
             print "Process did not exist yet"
     return "OK", 200
+
 
 def set_gpio_state(state):
     if state == 'High':
@@ -119,11 +122,13 @@ def get_gpio_state(pin):
     # Return current state
     return state
 
+
 def get_heater_command():
     # Returns true if the heater is to be turned on or false otherwise
     measurement = sensor.getMeasurement()
     command = controller.get_command(measurement.value)
     return command
+
 
 def control_gpio_state():
     command = get_heater_command()
@@ -134,9 +139,9 @@ def control_gpio_state():
 
 if __name__ == '__main__':
     try:
-        # app.run(debug=True)
-        app.run(host='0.0.0.0', port=8080, debug=True)
-
+        # app.run() # Use to run locally only on your machine
+        app.run(host='0.0.0.0', port=80) # This is visible on all computers on the network.
+        # Use the IP address of machine that is running the script to contact the server.
     finally:
         GPIO.cleanup()
         print "Bye."

@@ -1,7 +1,6 @@
-# First show ciruit with transistor, LED and resistor.
-# Turn the LED light on and off by running this script
-# Then replace the LED and 330Ohm resistor on the collector side with the relay.
-# Run the script again to turn the big light on and off.
+# Turn the light on and off using a script
+# This only works on the pi as the GPIO package
+# does not compile on a Mac/Windows machine (i think...)
 
 import RPi.GPIO as GPIO
 from time import sleep
@@ -16,6 +15,7 @@ GPIO.setup(pin, GPIO.OUT)
 # Set pin voltage to high
 GPIO.output(pin, GPIO.HIGH)
 
+# Do nothing for 3 sec
 sleep(3)
 
 # Set pin voltage to low
