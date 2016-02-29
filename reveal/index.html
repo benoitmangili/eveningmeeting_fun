@@ -113,6 +113,11 @@
                 <img class="stretch" data-src="img/gpio_real_thing.jpg">
             </section>
             <section>
+                <h3>How do you know which pin is which?</h3>
+                <img class="stretch" data-src="img/GPIO_Layout.png">
+                <a href="https://pinout.xyz/">https://pinout.xyz/</a>
+            </section>
+            <section>
             <pre class="python"><code data-trim contenteditable>
 import RPi.GPIO as GPIO
 # Set the pi to board mode
@@ -143,11 +148,6 @@ GPIO.output(pin, GPIO.LOW)
 GPIO.cleanup()
             </code></pre>
           </span>
-            </section>
-            <section>
-                <h3>How do you know which pin is which?</h3>
-                <img class="stretch" data-src="img/GPIO_Layout.png">
-                <a href="https://pinout.xyz/">https://pinout.xyz/</a>
             </section>
         </section>
 
@@ -202,6 +202,9 @@ def turn_me_off():
                   It is possible to open up a port to the outside world but then need to be careful about safety.
               </aside>
             </section>
+           <section>
+               <h1>Demo</h1>
+           </section>
             <section>
                 <h2>Let's have a go!</h2>
                 <p>192.168.0.105</p>
@@ -223,31 +226,14 @@ def turn_me_off():
 from flask import Flask, request, jsonify, render_template
 </code></pre>
 
-            <span class="fragment">
+            <span class="">
             <pre class="python"><code data-trim contenteditable>
 @app.route('/')
 def hello_world():
     return render_template('index.html')
 </code></pre>
             </span>
-            <span class="fragment">
-            <pre class="python"><code data-trim contenteditable>
-@app.route('/lamp', methods=['GET', 'PUT'])
-def lamp_stuff():
-    if request.method == 'PUT':
-        # Change state
-        data = request.form
-        state = data['state']
-
-        set_gpio_state(state)
-
-    # confirm the state has been set
-    state = get_gpio_state(pin)
-
-    return jsonify(state=state)
-</code></pre>
-            </span>
-            <span class="fragment">
+            <span class="">
             <pre class="python"><code data-trim contenteditable>
 app.run(host='0.0.0.0', port=8080, debug=True)
             </code></pre>
@@ -290,7 +276,7 @@ $(".OnButton").click(function() {
             </span>
            </section>
            <section>
-               <h3>Server side reminder:</h3>
+               <h3>Server:</h3>
             <pre class="python"><code data-trim contenteditable>
 @app.route('/lamp', methods=['GET', 'PUT'])
 def lamp_stuff():
@@ -306,6 +292,9 @@ def lamp_stuff():
 
     return jsonify(state=state)
 </code></pre>
+           </section>
+           <section>
+               <h1>Demo</h1>
            </section>
             <section>
                 <h2>Let's have a go!</h2>
@@ -404,6 +393,9 @@ $("#temperatureBtn").click(function() {
             </code></pre>
             </section>
             <section>
+               <h1>Demo</h1>
+            </section>
+            <section>
                 <h2>Let's have a go!</h2>
                 <h3>192.168.0.105</h3>
             </section>
@@ -446,9 +438,17 @@ def get_heater_command():
     return command
                </code></pre>
                 </span>
+               <span class="fragment">
+                   <pre class="python"><code data-trim contenteditable>
+def control_gpio_state():
+    command = get_heater_command()
+    GPIO.output(pin, command)
+    state = get_gpio_state(pin)
+                       </code></pre>
+               </span>
        </section>
        <section>
-        <h2>Let's have a go!</h2>
+        <h2>Demo</h2>
         <img class="stretch" data-src="img/ice_bucket_challenge.jpg">
 
       </section>
@@ -474,8 +474,8 @@ def get_heater_command():
        </section>
        <!-- Part 5 -->
         <section>
-        <h2>Bonus level unlocked:</h2>
-        <h3>Let's vote on twitter whether to turn on "the heating"!</h3>
+        <img class="stretch" data-src="img/jon.gif">
+            <p>There is no pi on Westeros...</p>
        </section>
       </div>
 
