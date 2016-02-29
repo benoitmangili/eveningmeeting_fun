@@ -88,7 +88,7 @@ var start_plot_loop = function() {
               url: "/temperature",
               type: "get",
       }).done(function (data) {
-        data.value += 18 + Math.random();
+        // data.value += 18 + Math.random();
         plot({datum: data, with_limits:true}, tempo)
       });
     }, tempo);

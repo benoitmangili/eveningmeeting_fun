@@ -16,8 +16,8 @@ class PeriodicTimer(object):
 
         self.callback = wrapper
 
-    def start(self):
-        self.thread = threading.Timer(self.interval, self.callback)
+    def start(self, *args, **kwargs):
+        self.thread = threading.Timer(self.interval, self.callback, args=args, kwargs=kwargs)
         self.thread.start()
 
     def cancel(self):
