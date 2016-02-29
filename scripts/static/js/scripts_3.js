@@ -20,7 +20,7 @@ var main = function() {
     start_plot_loop();
   });
 };
-var tempo = 1000;
+var tempo = 2000;
 var start_plot_loop = function() {
     graphInterval = setInterval(function() {
       $.ajax({
