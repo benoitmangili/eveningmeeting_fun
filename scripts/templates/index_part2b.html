@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- The stuff in the curly brackets is served by flask from the static folder. -->
+  <!-- The stuff in the curly brackets is served by flask from the static folder. -->
  <link rel="stylesheet" href="{{ url_for('static', filename='style/bootstrap/css/bootstrap.css') }}">
 
  <!-- make it mobile friendly: -->
@@ -32,6 +34,7 @@
     <div class="row" style="padding-top: 1em">
       <div class="col-md-12">
         <div class='bulb'>
+           <!-- This is just a lot of code to display the light bulb. Could also just use a circle that changes colour... -->
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="463.591px" height="458.582px" viewBox="0 0 463.591 458.582" enable-background="new 0 0 463.591 458.582" xml:space="preserve">
             <g id="star">
               <polygon fill="#FFFF00" points="231,115.885 258.793,9.071 258.556,119.589 312.483,23.757 284.231,130.445 360.621,52.126 
