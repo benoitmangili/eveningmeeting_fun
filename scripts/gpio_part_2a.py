@@ -43,8 +43,9 @@ def serve_static_file(filename):
 
 if __name__ == '__main__':
     try:
-        # app.run(debug=True)
-        app.run(host='0.0.0.0', port=80)
+        # app.run() # Use to run locally only on your machine
+        app.run(host='0.0.0.0', port=80) # This is visible on all computers on the network.
+        # Use the IP address of machine that is running the script to contact the server.
     finally:
         GPIO.cleanup()
         print "Bye."
