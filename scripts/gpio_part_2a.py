@@ -2,8 +2,10 @@ from flask import Flask, send_from_directory
 try:
    import RPi.GPIO as GPIO
 except:
+    # MockGPIO can be used for testing purposes when not working directly on the Pi
     from MockGPIO import MockGPIO
     GPIO = MockGPIO()
+    print "Using Mock GPIO"
 
 GPIO.setmode(GPIO.BOARD)
 
