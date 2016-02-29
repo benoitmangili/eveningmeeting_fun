@@ -21,5 +21,11 @@ class Controller:
         return command
 
     def update_temperature_range(self, set_point_lower, set_point_upper):
-        self.set_point_lower = set_point_lower
-        self.set_point_upper = set_point_upper
+
+        if set_point_lower <= set_point_upper:
+            self.set_point_lower = set_point_lower
+            self.set_point_upper = set_point_upper
+        else:
+            # Swap if the lower set point is larger than the upper
+            self.set_point_lower = set_point_upper
+            self.set_point_upper = set_point_lower
