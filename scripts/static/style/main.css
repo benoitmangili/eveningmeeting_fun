@@ -87,6 +87,7 @@ p {
   padding: 2em;
   text-align: center;
   margin-top:2em;
+  cursor:pointer;
 }
 
 .mediumButton {
@@ -97,6 +98,7 @@ p {
   text-align: center;
   margin: 0.5em 0;
   width: 100%;
+  cursor:pointer;
 }
 
 .mediumTitle {
